@@ -1,14 +1,14 @@
 <template>
   <div>
-    <carousel></carousel>
-    <about></about>
+    <banner></banner>
+    <description></description>
     <to-action></to-action>
   </div>
 </template>
 
 <script>
-import Carousel from '~/components/home/Carousel'
-import About from '~/components/home/About'
+import Banner from '@/components/about/Banner'
+import Description from '@/components/about/Description'
 import ToAction from '@/components/global/ToAction'
 /* import Characters from '~/apollo/queries/characters' */
 
@@ -21,8 +21,8 @@ import ToAction from '@/components/global/ToAction'
 
 export default {
   components: {
-    Carousel,
-    About,
+    Banner,
+    Description,
     ToAction
   }
   /* apollo: {

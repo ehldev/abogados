@@ -1,0 +1,12 @@
+@import './variables';
+
+@import 'bootstrap/scss/bootstrap.scss';
+@import 'bootstrap-vue/src/index.scss';
+
+body {
+    font-family: $body-font-family !important;
+}
+
+p {
+    font-weight: normal !important;
+}

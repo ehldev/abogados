@@ -1,0 +1,244 @@
+<template>
+<div class="banner">
+    <!-- <header-app logo="white"></header-app> -->
+    <header-app></header-app>
+
+    <b-carousel
+      id="carousel-1"
+      v-model="slide"
+      :interval="3000"
+      indicators
+      @sliding-start="onSlideStart"
+      @sliding-end="onSlideEnd"
+      class="home-carousel"
+    >
+
+      <!-- Slides with custom text -->
+      <b-carousel-slide class="home-slide first-slide">
+        <div class="row">
+            <div class="col-md-9 col-lg-6 text-left px-lg-0">
+              <h2 class="home-carousel__title">Rikell Vargas & Tuesta</h2>
+
+              <div class="home-carousel__content">
+                <p class="home-carousel__description text-white mt-3">
+                  Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.
+                </p>
+
+                <!-- <v-btn to="/sobre-nosotros" color="primary" min-width="150px" class="text-transform-none text-decoration-none px-5 mt-5">
+                      <span class="d-inline-block mt-1">
+                          Leer más
+                      </span>
+                      <img src="../../../assets/icons/arrow-right.svg" alt="" class="btn--icon mt-1 ml-3">
+                  </v-btn> -->
+                <div class="text-right mt-4">
+                  <nuxt-link to="/" class="btn btn-primary rounded-0">Más información</nuxt-link>
+                </div>
+              </div>
+            </div>
+        </div>
+      </b-carousel-slide>
+
+      <b-carousel-slide class="home-slide second-slide">
+        <div class="row">
+            <div class="col-md-9 col-lg-6 text-left px-lg-0">
+              <h2 class="home-carousel__title">Rikell Vargas & Tuesta</h2>
+
+              <div class="home-carousel__content">
+                <p class="home-carousel__description text-white mt-3">
+                  Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.
+                </p>
+
+                <!-- <v-btn to="/sobre-nosotros" color="primary" min-width="150px" class="text-transform-none text-decoration-none px-5 mt-5">
+                      <span class="d-inline-block mt-1">
+                          Leer más
+                      </span>
+                      <img src="../../../assets/icons/arrow-right.svg" alt="" class="btn--icon mt-1 ml-3">
+                  </v-btn> -->
+                <div class="text-right mt-4">
+                  <nuxt-link to="/" class="btn btn-primary rounded-0">Más información</nuxt-link>
+                </div>
+              </div>
+            </div>
+        </div>
+      </b-carousel-slide>
+
+      <b-carousel-slide class="home-slide third-slide">
+        <div class="row">
+            <div class="col-md-9 col-lg-6 text-left px-lg-0">
+              <h2 class="home-carousel__title">Rikell Vargas & Tuesta</h2>
+
+              <div class="home-carousel__content">
+                <p class="home-carousel__description text-white mt-3">
+                  Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.
+                </p>
+
+                <!-- <v-btn to="/sobre-nosotros" color="primary" min-width="150px" class="text-transform-none text-decoration-none px-5 mt-5">
+                      <span class="d-inline-block mt-1">
+                          Leer más
+                      </span>
+                      <img src="../../../assets/icons/arrow-right.svg" alt="" class="btn--icon mt-1 ml-3">
+                  </v-btn> -->
+                <div class="text-right mt-4">
+                  <nuxt-link to="/" class="btn btn-primary rounded-0">Más información</nuxt-link>
+                </div>
+              </div>
+            </div>
+        </div>
+      </b-carousel-slide>
+
+    </b-carousel>
+</div>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+
+// Components
+// import HeaderApp from '@/components/Header'
+import HeaderApp from '@/components/global/Header'
+
+export default {
+    data() {
+        return {
+            slide: 0,
+            sliding: null,
+            items: 9
+        }
+    },
+    components: {
+        HeaderApp
+    },
+    methods: {
+      onSlideStart(slide) {
+        this.sliding = true
+      },
+      onSlideEnd(slide) {
+        this.sliding = false
+      }
+    }
+}
+</script>
+
+<style lang="scss">
+@import '../../scss/variables';
+
+.home-carousel {
+
+    .carousel-indicators li {
+        width: 1.2em;
+        height: .3em;
+        border-radius: 40%;
+        opacity: 1;
+        outline: none;
+    }
+
+    .carousel-indicators .active {
+        background-color: $primary;
+    }
+
+    .carousel-caption {
+        top: 25%;
+        left: 10%;
+
+        @media (min-width: 1024px) {
+          top: 30%;
+          left: 12%;
+        }
+    }
+
+    &__content {
+      @media (min-width: 1200px) {
+        max-width: 90%;
+      }
+    }
+
+    &__title {
+      font-size: 1.5em;
+      font-weight: 800;
+
+      @media (min-width: 720px) {
+        max-width: 90%;
+        font-size: 2.5em;
+      }
+
+      @media (min-width: 1024px) {
+        margin-top: 2rem;
+      }
+    }
+
+    &__description {
+      background-color: rgba($dark, .07);
+      font-size: 1em;
+      font-weight: 400;
+      padding: 1rem;
+      border-left: 4px solid $primary;
+      transition: background-color .5s;
+
+      &:hover {
+        background-color: rgba($dark, .09);
+      }
+
+    }
+}
+
+.home-slide {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    background-color: $dark;
+    min-height: 90vh;
+
+    @media (min-width: 720px) {
+      min-height: 60vh;
+    }
+
+    @media (min-width: 1024px) {
+      min-height: 60vh;
+    }
+
+    @media (min-width: 1200px) {
+      min-height: 100vh;
+    }
+
+    &::before {
+        content: '';
+        /* background: rgb(39,72,133);
+        background: linear-gradient(90deg, rgba(39,72,133,1) 0%, rgba(39,72,133,0.13769257703081228) 100%); */
+        background-color: rgba($dark, .7);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.first-slide {
+  background-image: url('/slide-home/first-slide.jpg');
+  
+  @media (min-width: 720px) {
+    background-image: url('/slide-home/first-slide.jpg');
+  }
+  
+}
+
+.second-slide {
+  background-image: url('/slide-home/second-slide.jpg');
+  background-position: center;
+
+  @media (min-width: 720px) {
+    background-image: url('/slide-home/second-slide.jpg');
+  }
+}
+
+.third-slide {
+  background-image: url('/slide-home/third-slide.jpg');
+  background-position: left;
+
+  @media (min-width: 720px) {
+    background-image: url('/slide-home/third-slide.jpg');
+    background-position: center;
+  }
+}
+</style>
