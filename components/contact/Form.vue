@@ -101,7 +101,7 @@ export default {
 }
 
 .icon {
-    color: $primary;
+    color: $warning;
     font-weight: 700;
 }
 </style>

@@ -24,14 +24,8 @@
                   Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.
                 </p>
 
-                <!-- <v-btn to="/sobre-nosotros" color="primary" min-width="150px" class="text-transform-none text-decoration-none px-5 mt-5">
-                      <span class="d-inline-block mt-1">
-                          Leer más
-                      </span>
-                      <img src="../../../assets/icons/arrow-right.svg" alt="" class="btn--icon mt-1 ml-3">
-                  </v-btn> -->
                 <div class="text-right mt-4">
-                  <nuxt-link to="/" class="btn btn-primary rounded-0">Más información</nuxt-link>
+                  <nuxt-link to="/" class="btn btn-outline-warning">Más información</nuxt-link>
                 </div>
               </div>
             </div>
@@ -48,14 +42,8 @@
                   Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.
                 </p>
 
-                <!-- <v-btn to="/sobre-nosotros" color="primary" min-width="150px" class="text-transform-none text-decoration-none px-5 mt-5">
-                      <span class="d-inline-block mt-1">
-                          Leer más
-                      </span>
-                      <img src="../../../assets/icons/arrow-right.svg" alt="" class="btn--icon mt-1 ml-3">
-                  </v-btn> -->
                 <div class="text-right mt-4">
-                  <nuxt-link to="/" class="btn btn-primary rounded-0">Más información</nuxt-link>
+                  <nuxt-link to="/" class="btn btn-outline-warning">Más información</nuxt-link>
                 </div>
               </div>
             </div>
@@ -72,14 +60,8 @@
                   Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.
                 </p>
 
-                <!-- <v-btn to="/sobre-nosotros" color="primary" min-width="150px" class="text-transform-none text-decoration-none px-5 mt-5">
-                      <span class="d-inline-block mt-1">
-                          Leer más
-                      </span>
-                      <img src="../../../assets/icons/arrow-right.svg" alt="" class="btn--icon mt-1 ml-3">
-                  </v-btn> -->
                 <div class="text-right mt-4">
-                  <nuxt-link to="/" class="btn btn-primary rounded-0">Más información</nuxt-link>
+                  <nuxt-link to="/" class="btn btn-outline-warning">Más información</nuxt-link>
                 </div>
               </div>
             </div>
@@ -133,7 +115,7 @@ export default {
     }
 
     .carousel-indicators .active {
-        background-color: $primary;
+        background-color: $warning;
     }
 
     .carousel-caption {
@@ -171,7 +153,7 @@ export default {
       font-size: 1em;
       font-weight: 400;
       padding: 1rem;
-      border-left: 4px solid $primary;
+      border-left: 4px solid $warning;
       transition: background-color .5s;
 
       &:hover {

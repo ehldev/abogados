@@ -6,7 +6,7 @@
                 Nuestra firma, busca cultivar la confianza, transparencia, responsabilidad, Integridad, disponibilidad al cambio, pasión y transformación de valores que nuestra sociedad espera, pensando en un mundo mejor.
             </p>
 
-            <nuxt-link to="/contacto" class="btn btn-lg btn-primary rounded-0 mt-3">Contáctanos</nuxt-link>
+            <nuxt-link to="/contacto" class="btn btn-lg btn-warning rounded-0 mt-3">Contáctanos</nuxt-link>
         </div>
     </div>
 </section>
@@ -29,6 +29,7 @@
     padding-top: 5rem;
     padding-bottom: 5rem;
     position: relative;
+    box-shadow: 6px 10px 27px -3px rgba(0,0,0,0.61);
 
     @media (min-width: 1024px) {
         margin-top: 7rem;

@@ -2,12 +2,14 @@
   <div>
     <banner></banner>
     <form-contact></form-contact>
+    <footer-app></footer-app>
   </div>
 </template>
 
 <script>
 import Banner from '@/components/contact/Banner'
 import FormContact from '@/components/contact/Form'
+import FooterApp from '@/components/global/Footer'
 /* import Characters from '~/apollo/queries/characters' */
 
 /* query Characters {
@@ -20,7 +22,8 @@ import FormContact from '@/components/contact/Form'
 export default {
   components: {
     Banner,
-    FormContact
+    FormContact,
+    FooterApp
   }
   /* apollo: {
     characters: {

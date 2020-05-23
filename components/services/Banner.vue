@@ -1,14 +1,14 @@
 <template>
-<section class="container-fluid about-banner">
+<section class="container-fluid services-banner">
     <header-app></header-app>
     <div class="row justify-content-center h-100">
         <div class="col-md-12 px-0 h-100">
-            <div class="about-banner__info-container h-100">
-                <div class="about-banner__info py-3">
-                    <h2 class="about-banner__title mb-3">Sobre nosotros</h2>
+            <div class="services-banner__info-container h-100">
+                <div class="services-banner__info py-3">
+                    <h2 class="services-banner__title mb-3">Nuestros servicios</h2>
 
-                    <p class="about-banner__description">
-                        Como empresa legal, nuestro código de ética es crear un ambiente laboral basado en la honestidad, en el respeto y la tolerancia. Del mismo modo, queremos resaltar como uno de los valores éticos que se implementará en nuestra firma legal son: Lealtad y Compromiso. 
+                    <p class="services-banner__description">
+                        La firma legal, solamente está enfocada a dar asesoría legal en temas penales y el área de Criminalística.
                     </p>
                 </div>
             </div>
@@ -31,7 +31,7 @@ export default {
 @import '../../scss/_variables';
 @import '../../scss/bootstrap_custom';
 
-.about-banner {
+.services-banner {
     height: 80vh;
     background-image: url('/slide-home/first-slide.jpg');
     background-size: cover;
@@ -43,7 +43,7 @@ export default {
         height: 50vh;
     }
 
-    @media (min-width: 1200px) {
+    @media (min-width: 1024px) {
         height: 70vh;
     }
 

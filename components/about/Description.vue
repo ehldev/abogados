@@ -32,7 +32,11 @@
             <div class="col-md-6 col-lg-5 mb-5 mb-md-0">
                 <div class="card mission__card py-3">
                     <div class="card-body">
-                        <h3 class="mission__title mt-md-3 mt-lg-0">
+                        <p class="mission__icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </p>
+
+                        <h3 class="mission__title mt-md-1 mt-lg-0">
                             Nuestra
                             Misión
                         </h3>
@@ -50,6 +54,9 @@
             <div class="col-md-6 col-lg-5">
                 <div class="card mission__card py-3">
                     <div class="card-body">
+                        <p class="mission__icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </p>
                         <h3 class="mission__title">
                             Nuestra
                             Visión
@@ -101,7 +108,7 @@ export default {
 .about-description__title {
     font-size: 2.5em;
     font-weight: 800;
-    color: $primary;
+    color: $dark;
     margin: 0;
 }
 
@@ -145,10 +152,10 @@ export default {
         box-shadow: 1px 10px 15px -8px rgba(0,0,0,0.68);
 
         @media (min-width: 720px) {
-            height: 370px;
+            height: 400px;
         }
 
-        @media (min-width: 1024px) {
+        @media (min-width: 1200px) {
             height: 350px;
         }
 
@@ -156,10 +163,15 @@ export default {
             background-color: $dark !important;
         }
 
-        &:before {
+        &:hover .mission__icon{
+            color: $warning;
+            transform: translateY(-1rem);
+        }
+
+        /* &:before {
             -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
-            background: none repeat scroll 0 0 $primary; /* color esquina */
-            border-color: #FFFFFF #FFFFFF $primary $primary; /* color de borde */
+            background: none repeat scroll 0 0 $warning;
+            border-color: #FFFFFF #FFFFFF $warning $warning;
             border-style: solid;
             border-width: 0 36px 36px 0;
             content: "";
@@ -168,7 +180,7 @@ export default {
             right: 0;
             top: 0;
             width: 0;
-        }
+        } */
     }
 
     /* &__card:hover .mission__title {
@@ -179,6 +191,12 @@ export default {
             right: 0;
         }
     } */
+
+    &__icon {
+        font-size: 2em;
+        transition: transform .7s;
+        color: rgba($warning, .9);
+    }
 
     &__title {
         font-size: 2em;
@@ -202,19 +220,19 @@ export default {
         
         &::after {
             content: '';
-            background-color: $primary;
-            width: 50%;
+            background-color: $warning;
+            width: 40%;
             height: 4px;
             position: absolute;
             bottom: 0;
-            left: 25%;
-            right: 25%;
+            left: 30%;
+            right: 30%;
             transition: all 1s;
         }
     }
 
     &__description {
-        margin-top: 2rem;
+        margin-top: 1rem;
     }
 }
 </style>

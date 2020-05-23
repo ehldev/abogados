@@ -10,7 +10,7 @@
                         La firma Rikell Vargas & Tuesta, constituye un espacio desde el cual nos desempeñamos en el asesoramiento en temas penales de manera eficiente y eficaz. Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente. Nuestro propósito es el asesoramiento permanente y sobre todo, responsable en la solución de sus conflictos.
                     </p>
 
-                    <nuxt-link to="/sobre-nosotros" class="btn btn-outline-primary rounded-0 align-self-end mt-5">Más información</nuxt-link>
+                    <nuxt-link to="/sobre-nosotros" class="btn btn-outline-warning rounded-0 align-self-end mt-5">Más información</nuxt-link>
                 </div>
                 <div class="home-about__image">
                 </div>
@@ -51,7 +51,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-bottom: 4px solid rgba($primary, .8);
+    border-bottom: 4px solid rgba($warning, .8);
 }
 
 .home-about__title {

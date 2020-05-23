@@ -3,7 +3,7 @@
     <div class="header-container">
         <section class="nav-container">
             <div class="logo-container">
-                <div class="logo" @click.prevent="to('/')"></div>
+                <img src="/logo.png" alt="Logo Estudio Rikell Vargas & Tuesta" class="logo__image" />
             </div>
 
             <div class="hamburger" :class="setHamburgerActive" @click.prevent="toggleNav()">
@@ -16,7 +16,7 @@
                 <nuxt-link to="/" class="nav__link nav__link--mobile">INICIO</nuxt-link>
                 <nuxt-link to="/sobre-nosotros" class="nav__link nav__link--mobile">NOSOTROS</nuxt-link>
                 <nuxt-link to="/servicios" class="nav__link nav__link--mobile">SERVICIOS</nuxt-link>
-                <nuxt-link to="/contacto" class="nav__link nav__link--mobile btn btn-primary rounded-0 d-none d-lg-block">CONTACTO</nuxt-link>
+                <nuxt-link to="/contacto" class="nav__link nav__link--mobile btn-contact btn btn-primary rounded-0 d-none d-lg-block">CONTACTO</nuxt-link>
                 <nuxt-link to="/contacto" class="nav__link nav__link--mobile btn-contact-mobile text-dark btn btn-outline-dark rounded-0 d-lg-none">CONTACTO</nuxt-link>
             </nav>
         </section>
@@ -126,14 +126,7 @@ export default {
         background-color: $primary;
         border: 1px solid $primary;
     }
-}
-
-.btn-nav-contact {
-    margin-left: 1rem;
     
-    @media (min-width: 1024px) {
-        display: none !important;
-    }
 }
 
 .logo-container {
@@ -142,17 +135,12 @@ export default {
     width: 100%;
     display: flex;
     align-items: center;
+}
 
-    .logo {
-        /* background-image: url('~static/global/logo-blanco.svg'); */
-        width: 100%;
-        height: 80%;
-        cursor: pointer;
-
-        @media (min-width: 1024px) {
-            height: 90%;
-        }
-    }
+.logo__image {
+    width: 120px;
+    height: 80px;
+    cursor: pointer;
 }
 
 .nav-container {
@@ -161,6 +149,8 @@ export default {
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 1fr auto;
     position: relative;
+    align-items: center;
+    align-content: center;
     /* transition: background-color .5s; */
 
     @media (min-width: 1024px) {
@@ -246,12 +236,20 @@ export default {
 
         &::after {
             content: '';
-            background-color: $primary;
+            background-color: $warning;
             width: 1.5rem;
             height: 2px;
             position: absolute;
             bottom: 0;
             left: 10%;
+        }
+    }
+
+    /* Quita el borde del link activo */
+    &.btn-contact.nuxt-link-active.nuxt-link-exact-active {
+        &::after {
+            content: '';
+            background-color: transparent;
         }
     }
 }
@@ -305,11 +303,6 @@ export default {
 .header--dark {
     background-color: $dark;
     border-bottom: 1px solid rgba($dark, .3);
-
-    .btn--contact {
-        background-color: $primary;
-        border-color: $primary;
-    }
 
     .logo {
         /* background-image: url('~static/global/logo-azul.svg'); */

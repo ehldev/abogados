@@ -3,6 +3,7 @@
     <carousel></carousel>
     <about></about>
     <to-action></to-action>
+    <footer-app></footer-app>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import Carousel from '~/components/home/Carousel'
 import About from '~/components/home/About'
 import ToAction from '@/components/global/ToAction'
+import FooterApp from '@/components/global/Footer'
 /* import Characters from '~/apollo/queries/characters' */
 
 /* query Characters {
@@ -23,7 +25,8 @@ export default {
   components: {
     Carousel,
     About,
-    ToAction
+    ToAction,
+    FooterApp
   }
   /* apollo: {
     characters: {

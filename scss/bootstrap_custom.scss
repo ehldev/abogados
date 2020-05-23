@@ -10,3 +10,23 @@ body {
 p {
     font-weight: normal !important;
 }
+
+.btn {
+    border-radius: .15rem;
+}
+
+.btn-warning {
+    color: white;
+
+    &:hover {
+        color: white;
+    }
+}
+
+.btn-outline-warning {
+    color: $warning;
+
+    &:hover {
+        color: white;
+    }
+}
