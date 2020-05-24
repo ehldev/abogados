@@ -1,0 +1,27 @@
+{
+  page(id: "cGFnZToxNQ==") {
+    id
+    title
+    content
+    featuredImage{
+      mediaItemUrl
+    }
+    nosotros{
+      informacion
+      mision
+      vision
+      valor1
+      iconoValor1
+      valor2
+      iconoValor2
+      valor3
+      iconoValor3
+      representante1
+      rol1
+      foto1{
+        mediaItemUrl
+      }
+      frase
+    }
+  }
+}

@@ -11,57 +11,22 @@
       @sliding-start="onSlideStart"
       @sliding-end="onSlideEnd"
       class="home-carousel"
+      v-if="sliders"
     >
 
       <!-- Slides with custom text -->
-      <b-carousel-slide class="home-slide first-slide">
+      <b-carousel-slide class="home-slide first-slide" v-for="(item, index) in reverseItems" :key="index" :img-src="item.portada.imagenDestacada.mediaItemUrl" :img-alt="item.portada.imagenDestacada.mediaItemUrl">
         <div class="row">
             <div class="col-md-9 col-lg-6 text-left px-lg-0">
-              <h2 class="home-carousel__title">Rikell Vargas & Tuesta</h2>
+              <h2 class="home-carousel__title">{{ item.title }}</h2>
 
               <div class="home-carousel__content">
-                <p class="home-carousel__description text-white mt-3">
-                  Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.
+                <p class="home-carousel__description text-white mt-3" v-html="item.content">
                 </p>
+    
 
                 <div class="text-right mt-4">
-                  <nuxt-link to="/" class="btn btn-outline-warning">Más información</nuxt-link>
-                </div>
-              </div>
-            </div>
-        </div>
-      </b-carousel-slide>
-
-      <b-carousel-slide class="home-slide second-slide">
-        <div class="row">
-            <div class="col-md-9 col-lg-6 text-left px-lg-0">
-              <h2 class="home-carousel__title">Rikell Vargas & Tuesta</h2>
-
-              <div class="home-carousel__content">
-                <p class="home-carousel__description text-white mt-3">
-                  Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.
-                </p>
-
-                <div class="text-right mt-4">
-                  <nuxt-link to="/" class="btn btn-outline-warning">Más información</nuxt-link>
-                </div>
-              </div>
-            </div>
-        </div>
-      </b-carousel-slide>
-
-      <b-carousel-slide class="home-slide third-slide">
-        <div class="row">
-            <div class="col-md-9 col-lg-6 text-left px-lg-0">
-              <h2 class="home-carousel__title">Rikell Vargas & Tuesta</h2>
-
-              <div class="home-carousel__content">
-                <p class="home-carousel__description text-white mt-3">
-                  Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.
-                </p>
-
-                <div class="text-right mt-4">
-                  <nuxt-link to="/" class="btn btn-outline-warning">Más información</nuxt-link>
+                  <nuxt-link to="/sobre-nosotros" class="btn btn-outline-warning">Más información</nuxt-link>
                 </div>
               </div>
             </div>
@@ -74,6 +39,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import carouselItems from '@/apollo/queries/carousel-home'
 
 // Components
 // import HeaderApp from '@/components/Header'
@@ -83,9 +49,14 @@ export default {
     data() {
         return {
             slide: 0,
-            sliding: null,
-            items: 9
+            sliding: null
         }
+    },
+    apollo: {
+      sliders: {
+        prefetch: true,
+        query: carouselItems
+      }
     },
     components: {
         HeaderApp
@@ -96,6 +67,13 @@ export default {
       },
       onSlideEnd(slide) {
         this.sliding = false
+      }
+    },
+    computed: {
+      reverseItems: function() {
+        if(this.sliders) {
+          return this.sliders.nodes.reverse()
+        }
       }
     }
 }
@@ -169,18 +147,22 @@ export default {
     background-attachment: fixed;
     position: relative;
     background-color: $dark;
-    min-height: 90vh;
+    height: 90vh;
 
     @media (min-width: 720px) {
-      min-height: 60vh;
+      height: 60vh;
     }
 
     @media (min-width: 1024px) {
-      min-height: 60vh;
+      height: 60vh;
     }
 
     @media (min-width: 1200px) {
-      min-height: 100vh;
+      height: 100vh;
+    }
+
+    img {
+      height: 100%;
     }
 
     &::before {

@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div v-if="page">
     <banner></banner>
-    <description></description>
-    <values></values>
+    <description :image="page.featuredImage.mediaItemUrl" :info="page.nosotros.informacion" :mission="page.nosotros.mision" :vission="page.nosotros.vision"></description>
+    <values :values="values"></values>
     <testimonies></testimonies>
-    <to-action></to-action>
+    <to-action :info="page.nosotros.frase"></to-action>
     <footer-app></footer-app>
   </div>
 </template>
@@ -16,7 +16,9 @@ import Values from '@/components/about/Values'
 import Testimonies from '@/components/about/Testimonies'
 import ToAction from '@/components/global/ToAction'
 import FooterApp from '@/components/global/Footer'
-/* import Characters from '~/apollo/queries/characters' */
+
+// Queries
+import about from '@/apollo/queries/about'
 
 /* query Characters {
   characters {
@@ -33,13 +35,50 @@ export default {
     ToAction,
     Testimonies,
     FooterApp
-  }
-  /* apollo: {
-    characters: {
-      prefetch: true,
-      query: Characters
+  },
+  head() {
+    let title = 'Sobre nosotros - Rikell Vargas & Tuesta',
+      description = 'La firma Rikell Vargas & Tuesta, constituye un espacio desde el cual nos desempeñamos en el asesoramiento en temas penales de manera eficiente y eficaz. Somos expertos en el ámbito del litigio.'
+      
+      return {
+        title: title,
+        meta: [
+          // Twitter OpenGraph
+          {name: 'twitter:title', content: title},
+          {name: 'twitter:description', content: description},
+
+          // Facebook OpenGraph
+          {property: 'og:url', content: 'https://abogados.josejollja.com/sobre-nosotros'},
+          {property: 'og:title', content: title},
+          {property: 'og:site_name', content: title},
+          {property: 'og:description', content: description}
+        ]
+      }
+  },
+  apollo: {
+      page: {
+          prefetch: true,
+          query: about
+      }
+  },
+  computed: {
+    values: function() {
+      return [
+        {
+          valueName: this.page.nosotros.valor1,
+          valueIcon: this.page.nosotros.iconoValor1
+        },
+        {
+          valueName: this.page.nosotros.valor2,
+          valueIcon: this.page.nosotros.iconoValor2
+        },
+        {
+          valueName: this.page.nosotros.valor2,
+          valueIcon: this.page.nosotros.iconoValor2
+        }
+      ]
     }
-  } */
+  }
 }
 </script>
 

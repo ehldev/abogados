@@ -2,20 +2,22 @@
 <section class="container-fluid to-action">
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
-            <p class="to-action__description lead mt-3">
+            <div v-html="info" v-if="info" class="to-action__info"></div>
+            
+            <p class="to-action__description lead mt-3" v-else>
                 Nuestra firma, busca cultivar la confianza, transparencia, responsabilidad, Integridad, disponibilidad al cambio, pasión y transformación de valores que nuestra sociedad espera, pensando en un mundo mejor.
             </p>
 
-            <nuxt-link to="/contacto" class="btn btn-lg btn-warning rounded-0 mt-3">Contáctanos</nuxt-link>
+            <nuxt-link to="/contacto" class="btn btn-lg btn-warning mt-3">Contáctanos</nuxt-link>
         </div>
     </div>
 </section>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {
+    props: ['info']
+}
 </script>
 
 <style lang="scss">
@@ -25,7 +27,7 @@
     background-image: url('/slide-home/third-slide.jpg');
     background-size: cover;
     color: white;
-    margin-top: 5rem;
+    margin-top: 4rem;
     padding-top: 5rem;
     padding-bottom: 5rem;
     position: relative;
@@ -53,6 +55,14 @@
 
         &::after {
             content: close-quote;
+        }
+    }
+
+    &__info {
+        span,
+        p {
+            text-align: center;
+            font-family: 'Open Sans', sans-serif !important;
         }
     }
 }

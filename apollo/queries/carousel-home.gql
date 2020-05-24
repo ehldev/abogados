@@ -1,0 +1,14 @@
+{
+  sliders {
+    nodes{
+      title
+      content
+      portada{
+        imagenDestacada{
+          mediaItemUrl
+          altText
+        }
+      }
+    }
+  }
+}

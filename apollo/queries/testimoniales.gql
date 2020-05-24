@@ -1,0 +1,8 @@
+{
+  testimoniales{
+    nodes {
+      title
+      content
+    }
+  }
+}

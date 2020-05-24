@@ -12,8 +12,11 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
-    ],
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { hid: 'fbtype', property: 'og:type', content: 'website' },
+      { hid: 'fbimage', property: 'og:image', content: 'https://abogados.josejollja.com/wp-content/uploads/2020/05/logo-abogado.png' },
+      { hid: 'twcard', property: 'twitter:card', content: 'https://abogados.josejollja.com/wp-content/uploads/2020/05/logo-abogado.png' },
+      { hid: 'twimage', property: 'twitter:image', content: 'https://abogados.josejollja.com/wp-content/uploads/2020/05/logo-abogado.png' }    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap' },
@@ -43,6 +46,7 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    '@nuxtjs/vuetify'
   ],
   /*
   ** Nuxt.js modules
@@ -59,7 +63,10 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'https://rickandmortyapi.com/graphql'
+        httpEndpoint: 'https://abogados.josejollja.com/graphql',
+        inMemoryCacheOptions: {
+          addTypename: false
+        }
       }
     }
   },

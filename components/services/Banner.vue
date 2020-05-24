@@ -43,7 +43,7 @@ export default {
         height: 50vh;
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1200px) {
         height: 70vh;
     }
 

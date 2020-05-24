@@ -5,6 +5,9 @@
             <div class="col-md-4">
                 <div class="testimonies__content mb-5 px-1">
                     <h2 class="testimonies__title">Conozca que opinan nuestros clientes</h2>
+                    <!-- <pre>
+                        {{ testimoniales.nodes }}
+                    </pre> -->
                 </div>
             </div>
 
@@ -15,20 +18,22 @@
                     fade
                     indicators
                     :interval="4000000"
+                    v-if="testimoniales"
                 >
                     <b-carousel-slide
                     class="testimonies__carousel-item h-100"
+                    v-for="(item, index) in testimoniales.nodes"
+                    :key="index"
                     >
-                        <h3 class="testimonies__carousel-title text-left mb-3">Erick, cliente 1.</h3>
+                        <h3 class="testimonies__carousel-title text-left mb-3">{{ item.title }}</h3>
 
-                        <p class="testimonies__carousel-description text-left">
-                            Lorem ipsum 1 dolor sit amet consectetur adipisicing elit. Magnam dignissimos sed animi soluta doloremque voluptas quisquam in et obcaecati blanditiis culpa explicabo delectus a nobis, quos alias molestiae id eligendi.
+                        <p class="testimonies__carousel-description text-left" v-html="item.content">
                         </p>
 
                         <i class="fas fa-quote-left testimonies__icon"></i>
                     </b-carousel-slide>
 
-                    <b-carousel-slide
+                    <!-- <b-carousel-slide
                     class="testimonies__carousel-item"
                     >
                         <h3 class="testimonies__carousel-title text-left mb-3">Jon Doe, cliente 2.</h3>
@@ -50,7 +55,7 @@
                         </p>
 
                         <i class="fas fa-quote-left testimonies__icon"></i>
-                    </b-carousel-slide>
+                    </b-carousel-slide> -->
                 </b-carousel>
             </div>
         </div>
@@ -59,9 +64,16 @@
 </template>
 
 <script>
-    export default {
-        
+import testimoniales from '@/apollo/queries/testimoniales'
+
+export default {
+    apollo: {
+        testimoniales: {
+            prefetch: true,
+            query: testimoniales
+        }
     }
+}
 </script>
 
 <style lang="scss">
@@ -81,6 +93,10 @@
         color: white;
         font-weight: 700;
 
+        @media (min-width: 720px) {
+          font-size: 1.3em;
+        }
+
         @media (min-width: 1024px) {
           font-size: 2em;
         }
@@ -88,12 +104,12 @@
 
     &__content {
         padding-right: 1rem;
-        border-bottom: 2px solid $warning;
+        border-bottom: 3px solid $warning;
     }
 
     &__carousel-item {
         background-color: $dark;
-        min-height: 200px;
+        min-height: 150px;
         position: relative;
     }
 

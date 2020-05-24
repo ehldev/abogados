@@ -1,5 +1,5 @@
 <template>
-<div class="values bg-dark">
+<div class="values bg-dark" v-if="values">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -7,15 +7,15 @@
             </div>
         </div>
         <div class="row justify-content-center values__list mt-5">
-            <div class="col-md-4 col-lg-3 mb-3">
+            <div class="col-md-4 col-lg-3 mb-3" v-for="(value, index) in values" :key="index">
                 <div class="value py-5">
                     <span class="value__icon">
-                        <i class="fas fa-user-tie"></i>
+                        <i :class="value.valueIcon"></i>
                     </span>
-                    <h3 class="value__title">Profesionalismo</h3>
+                    <h3 class="value__title">{{ value.valueName }}</h3>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-3 mb-3">
+            <!-- <div class="col-md-4 col-lg-3 mb-3">
                 <div class="value py-5">
                     <span class="value__icon">
                         <i class="fas fa-balance-scale-right"></i>
@@ -30,7 +30,7 @@
                     </span>
                     <h3 class="value__title">Compromiso y responsabilidad</h3>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -38,7 +38,7 @@
 
 <script>
 export default {
-    
+    props: ['values']
 }
 </script>
 

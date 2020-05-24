@@ -88,7 +88,7 @@ export default {
         max-width: 80%;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
+        grid-template-rows: 150px 1fr;
         grid-gap: 1rem;
         margin: 0 auto;
         padding: 1rem;
@@ -135,9 +135,8 @@ export default {
 
     &__info-container {
         z-index: 100;
-        margin-top: 1rem;
         padding-bottom: 1rem;
-        border-bottom: 2px solid rgba($warning, .9);
+        border-bottom: 3px solid rgba($warning, .9);
 
         @media (min-width: 720px) {
             margin-top: 0;
@@ -145,11 +144,10 @@ export default {
     }
 
     .footer__logo {
-        width: 50%;
-        border-radius: 50%;
+        width: 100%;
 
-        @media (min-width: 720px) {
-            width: 60%;
+        @media (min-width: 1024px) {
+            width: 80%;
         }
     }
 }

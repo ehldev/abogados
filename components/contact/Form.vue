@@ -1,7 +1,7 @@
 <template>
 <div class="container contact">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6 mb-5 mb-lg-0">
             <div class="contact__info">
                 <h3 class="contact__subtitle">PONGÁMONOS EN CONTACTO</h3>
                 <h2 class="contact__title mb-3">Detalles de contacto</h2>
@@ -36,6 +36,39 @@
 
             </div>
         </div>
+        <div class="col-lg-6">
+            <v-app>
+                <v-form ref="form" @submit.prevent="submit()">
+                    <v-text-field
+                        v-model="name"
+                        label="Nombre completo"
+                        filled
+                    ></v-text-field>
+
+                    <v-text-field
+                        v-model="email"
+                        label="Correo electrónico"
+                        filled
+                    ></v-text-field>
+
+                    <v-text-field
+                        v-model="affair"
+                        label="Asunto"
+                        filled
+                    ></v-text-field>
+
+                    <v-textarea
+                    filled
+                    name="input-7-4"
+                    label="Mensaje"
+                    ></v-textarea>
+
+                    <div class="form-group text-right">
+                        <input type="submit" class="btn btn-lg btn-warning px-5">
+                    </div>
+                </v-form>
+            </v-app>
+        </div>
     </div>
 
     <!-- Maps -->
@@ -49,7 +82,16 @@
 
 <script>
 export default {
-    
+    data() {
+        return {
+            name: ''
+        }
+    },
+    methods: {
+        submit() {
+            alert('En progreso')
+        }
+    }
 }
 </script>
 
@@ -103,5 +145,9 @@ export default {
 .icon {
     color: $warning;
     font-weight: 700;
+}
+
+.theme--light.v-application {
+    max-height: 500px;
 }
 </style>

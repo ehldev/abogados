@@ -1,9 +1,9 @@
 <template>
 <header id="header" class="header" :class="headerDark || this.color === 'dark' ? 'header--dark' : ''">
     <div class="header-container">
-        <section class="nav-container">
+        <section class="nav-container align-items-center">
             <div class="logo-container">
-                <img src="/logo.png" alt="Logo Estudio Rikell Vargas & Tuesta" class="logo__image" />
+                <img src="/logo-estudio.png" alt="Logo Estudio Rikell Vargas & Tuesta" class="logo__image" />
             </div>
 
             <div class="hamburger" :class="setHamburgerActive" @click.prevent="toggleNav()">
@@ -12,12 +12,12 @@
                 </div>
             </div>
 
-            <nav class="nav py-0 animated" :class="setNavActive">
+            <nav class="nav py-0 animated mt-lg-4" :class="setNavActive">
                 <nuxt-link to="/" class="nav__link nav__link--mobile">INICIO</nuxt-link>
                 <nuxt-link to="/sobre-nosotros" class="nav__link nav__link--mobile">NOSOTROS</nuxt-link>
                 <nuxt-link to="/servicios" class="nav__link nav__link--mobile">SERVICIOS</nuxt-link>
                 <nuxt-link to="/contacto" class="nav__link nav__link--mobile btn-contact btn btn-primary rounded-0 d-none d-lg-block">CONTACTO</nuxt-link>
-                <nuxt-link to="/contacto" class="nav__link nav__link--mobile btn-contact-mobile text-dark btn btn-outline-dark rounded-0 d-lg-none">CONTACTO</nuxt-link>
+                <nuxt-link to="/contacto" class="nav__link nav__link--mobile btn-contact-mobile text-dark btn btn-outline-dark d-lg-none">CONTACTO</nuxt-link>
             </nav>
         </section>
     </div>
@@ -97,6 +97,7 @@ export default {
     }
 
     &-container {
+        width: 90%;
         margin: 0 auto;
 
         @media (min-width: 1024px) {
@@ -138,9 +139,21 @@ export default {
 }
 
 .logo__image {
-    width: 120px;
-    height: 80px;
+    width: 50%;
     cursor: pointer;
+
+    @media (min-width: 720px) {
+      width: 30%;
+    }
+
+    @media (min-width: 1024px) {
+      width: 60%;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 1200px) {
+      margin-top: 0;
+    }
 }
 
 .nav-container {

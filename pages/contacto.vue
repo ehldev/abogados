@@ -24,6 +24,25 @@ export default {
     Banner,
     FormContact,
     FooterApp
+  },
+  head() {
+    let title = 'Contacto - Rikell Vargas & Tuesta',
+      description = 'Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.'
+      
+      return {
+        title: title,
+        meta: [
+          // Twitter OpenGraph
+          {name: 'twitter:title', content: title},
+          {name: 'twitter:description', content: description},
+
+          // Facebook OpenGraph
+          {property: 'og:url', content: 'https://abogados.josejollja.com/contacto'},
+          {property: 'og:title', content: title},
+          {property: 'og:site_name', content: title},
+          {property: 'og:description', content: description}
+        ]
+      }
   }
   /* apollo: {
     characters: {

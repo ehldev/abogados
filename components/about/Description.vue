@@ -4,13 +4,15 @@
         <div class="row justify-content-center">
             <div class="col-md-12 px-0">
                 <div class="about-description__content">
-                    <div class="about-description__image">
+                    <div class="about-description__image" v-bind:style="{ backgroundImage: 'url(' + image + ')' }">
                     </div>
 
                     <div class="about-description__info">
                         <h2 class="about-description__title mb-3">Rikell Vargas & Tuesta</h2>
 
-                        <p class="about-description__description">
+                        <div v-html="info" v-if="info" class="about-description__info-api px-lg-1"></div>
+
+                        <!-- <p class="about-description__description">
                             La firma Rikell Vargas & Tuesta, constituye un espacio desde el cual nos desempeñamos en el asesoramiento en temas penales de manera eficiente y eficaz. Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente. Nuestro propósito es el asesoramiento permanente y sobre todo, responsable en la solución de sus conflictos.
                         </p>
 
@@ -20,7 +22,7 @@
 
                         <p class="about-description__description">
                             Nos desempeñamos en el análisis de estudios científicos de escenas de crímenes, en especial en los delitos violentos, que hoy en día aquejan y flagelan a la sociedad. Una buena investigación abre el camino para el éxito en el juicio oral.
-                        </p>
+                        </p> -->
                     </div>
                 </div>
             </div>
@@ -41,13 +43,15 @@
                             Misión
                         </h3>
 
-                        <p class="mission__description mb-0">
+                        <div v-html="mission" v-if="mission" class="mission__info mt-3"></div>
+
+                        <!-- <p class="mission__description mb-0">
                             Alcanzar una actividad de asesoría y consultoría legal especializada en el campo penal y su plataforma de las ciencias forenses.
                         </p>
 
                         <p class="my-0">
                             Pues bien, se busca posesionarse como una firma legal de elevado prestigio.
-                        </p>
+                        </p> -->
                     </div>
                 </div>
             </div>
@@ -62,9 +66,11 @@
                             Visión
                         </h3>
 
-                        <p class="mission__description">
+                        <div v-html="vission" v-if="vission" class="mission__info mt-3"></div>
+
+                        <!-- <p class="mission__description">
                             La firma Rikell Vargas & Tuesta, tienen un enorme y ambicioso propósito de contribuir al desarrollo y correcta administración de justicia, velar por los derechos de los justiciables, propósitos que son confiados en un equipo especializado y sobre todo responsable. 
-                        </p>
+                        </p> -->
                     </div>
                 </div>
             </div>
@@ -75,7 +81,7 @@
 
 <script>
 export default {
-    
+    props: ['image', 'info', 'mission', 'vission']
 }
 </script>
 
@@ -85,6 +91,13 @@ export default {
 
 .about-description {
     margin-top: 5rem;
+
+    &__info-api {
+        span,
+        p {
+            font-family: 'Open Sans', sans-serif !important;
+        }
+    }
 }
 
 .about-description__content {
@@ -118,7 +131,7 @@ export default {
 }
 
 .about-description__image {
-    background-image: url('/slide-home/second-slide.jpg');
+    /* background-image: url('/slide-home/second-slide.jpg'); */
     background-size: cover;
     background-position: center;
     position: relative;
@@ -140,7 +153,7 @@ export default {
     text-align: center;
 
     @media (min-width: 1024px) {
-        margin-top: 7rem;
+        margin-top: 5rem;
     }
 
     &__card {
@@ -183,14 +196,6 @@ export default {
         } */
     }
 
-    /* &__card:hover .mission__title {
-        &::before {
-            width: 100%;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-    } */
 
     &__icon {
         font-size: 2em;
@@ -233,6 +238,13 @@ export default {
 
     &__description {
         margin-top: 1rem;
+    }
+
+    &__info {
+        span,
+        p {
+            font-family: 'Open Sans', sans-serif !important;
+        }
     }
 }
 </style>
