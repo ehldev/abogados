@@ -1,0 +1,11 @@
+{
+  page(id: "cGFnZTo0Ng==") {
+    id
+    title
+    content
+    featuredImage{
+      mediaItemUrl
+      altText
+    } 
+  }
+}

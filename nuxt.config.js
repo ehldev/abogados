@@ -54,7 +54,8 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
-    '@nuxtjs/apollo'
+    '@nuxtjs/apollo',
+    '@nuxtjs/axios'
   ],
   bootstrapVue: {
     bootstrapCSS: false, // Or `css: false`

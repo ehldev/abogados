@@ -3,7 +3,9 @@
     <div class="header-container">
         <section class="nav-container align-items-center">
             <div class="logo-container">
-                <img src="/logo-estudio.png" alt="Logo Estudio Rikell Vargas & Tuesta" class="logo__image" />
+                <nuxt-link to="/">
+                    <img src="/logo-estudio.png" alt="Logo Estudio Rikell Vargas & Tuesta" class="logo__image" />
+                </nuxt-link>
             </div>
 
             <div class="hamburger" :class="setHamburgerActive" @click.prevent="toggleNav()">
@@ -16,8 +18,9 @@
                 <nuxt-link to="/" class="nav__link nav__link--mobile">INICIO</nuxt-link>
                 <nuxt-link to="/sobre-nosotros" class="nav__link nav__link--mobile">NOSOTROS</nuxt-link>
                 <nuxt-link to="/servicios" class="nav__link nav__link--mobile">SERVICIOS</nuxt-link>
+                <nuxt-link to="/publicaciones" class="nav__link nav__link--mobile">PUBLICACIONES</nuxt-link>
                 <nuxt-link to="/contacto" class="nav__link nav__link--mobile btn-contact btn btn-primary rounded-0 d-none d-lg-block">CONTACTO</nuxt-link>
-                <nuxt-link to="/contacto" class="nav__link nav__link--mobile btn-contact-mobile text-dark btn btn-outline-dark d-lg-none">CONTACTO</nuxt-link>
+                <nuxt-link to="/contacto" class="nav__link nav__link--mobile btn-contact-mobile btn btn-outline-dark text-white d-lg-none">CONTACTO</nuxt-link>
             </nav>
         </section>
     </div>
@@ -87,7 +90,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 1000;
     padding: .5rem 0;
     background-color: $dark;
     /* transition: background-color .5s linear; */
@@ -188,7 +191,7 @@ export default {
     position: absolute;
     top: .5rem;
     right: -170%;
-    z-index: 100;
+    z-index: 1000;
     transition: right .7s;
 
     @media (min-width: 1024px) {
@@ -229,7 +232,7 @@ export default {
 }
 
 .nav__link {
-    width: 100%;
+    width: max-content;
     color: rgba(white, .7);
     display: inline-block;
     margin: .5rem 0;

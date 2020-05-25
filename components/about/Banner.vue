@@ -1,15 +1,13 @@
 <template>
-<section class="container-fluid about-banner">
+<section class="container-fluid about-banner" v-if="pageData" v-bind:style="{backgroundImage: 'url(' + pageData.featuredImage.mediaItemUrl + ')'}">
     <header-app></header-app>
     <div class="row justify-content-center h-100">
         <div class="col-md-12 px-0 h-100">
             <div class="about-banner__info-container h-100">
-                <div class="about-banner__info py-3">
-                    <h2 class="about-banner__title mb-3">Sobre nosotros</h2>
+                <div class="about-banner__info p-3">
+                    <h2 class="about-banner__title mb-3">{{ pageData.title }}</h2>
 
-                    <p class="about-banner__description">
-                        Como empresa legal, nuestro código de ética es crear un ambiente laboral basado en la honestidad, en el respeto y la tolerancia. Del mismo modo, queremos resaltar como uno de los valores éticos que se implementará en nuestra firma legal son: Lealtad y Compromiso. 
-                    </p>
+                    <div v-html="pageData.content"></div>
                 </div>
             </div>
         </div>
@@ -24,6 +22,7 @@ export default {
     components: {
         HeaderApp
     },
+    props: ['pageData']
 }
 </script>
 
@@ -33,17 +32,17 @@ export default {
 
 .about-banner {
     height: 80vh;
-    background-image: url('/slide-home/first-slide.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
     box-shadow: -2px 8px 9px -1px rgba(0,0,0,0.36);
 
     @media (min-width: 720px) {
-        height: 50vh;
+        height: 60vh;
     }
 
     @media (min-width: 1200px) {
+        background-position: top;
         height: 70vh;
     }
 

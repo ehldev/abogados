@@ -1,60 +1,73 @@
 <template>
-<footer class="footer bg-dark">
-    <div class="footer__content align-items-center">
-        <!-- Logo -->
-        <div class="footer__logo-container">
-            <img src="/logo-estudio.svg" alt="Logo Estudio Rikell Vargas & Tuesta" class="img-fluid footer__logo">
-        </div>
+<footer class="footer" v-if="page">
+    <div class="footer__content container">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="/logo-estudio.svg" alt="Logo Estudio Rikell Vargas & Tuesta" class="footer__logo">
+            </div>
 
-        <!-- Footer info -->
-        <div class="footer__info-container">
-            <p class="footer__title mb-3">Estudio Rikell Vargas & Tuesta</p>
-            <p class="description text-white mb-2">
-                <span class="footer__icon mr-1">
-                    <i class="fas fa-map-marker-alt"></i>
-                </span>
-                Jr. Don Bosco N° 436, Departamento 201 - Breña, Lima.
-            </p>
-            <p class="description text-white mb-2">
-                <span class="footer__icon mr-2">
-                    <i class="fas fa-mobile-alt"></i>
-                </span>
-                
-                928 351 168
-            </p>
-            <p class="description text-white mb-2">
-                <span class="footer__icon">
-                    <i class="far fa-envelope-open"></i>
-                </span>
-                info@demolink.org
-            </p>
+            <div class="col-md-8 d-flex align-items-md-center text-center text-md-left">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="footer__title mb-3">Estudio Rikell Vargas & Tuesta</h3>
+                        <p class="description text-white mb-2 d-flex justify-content-center justify-content-md-start mt-3">
+                            <span class="footer__icon mr-md-2">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </span>
+                            {{ page.contacto.direccion }}
+                        </p>
+                        <p class="description text-white mb-2 d-flex justify-content-center justify-content-md-start">
+                            <span class="footer__icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </span>
+                            
+                            {{ page.contacto.telefono }}
+                        </p>
+                        <p class="description text-white mb-2 d-flex justify-content-center justify-content-md-start">
+                            <span class="footer__icon">
+                                <i class="far fa-envelope-open"></i>
+                            </span>
+                            <a href="mailto:info@demolink.org" class="text-white">info@demolink.org</a>
+                        </p>
+                    </div>
 
-            <!-- Social icons -->
-            <!-- <div class="footer__social mt-3">
-                <a href="https://www.facebook.com/ABRGrupoConsultor/" target="_blank" class="mx-1">
-                    <img src="../assets/icons/facebook.svg" alt="Facebook ABR Grupo consultor">
-                </a>
-                <a href="https://www.instagram.com/abrgrupoconsultor/" target="_blank" class="mx-1">
-                    <img src="../assets/icons/instagram.svg" alt="Instagram ABR Grupo consultor">
-                </a>
-                <a href="https://twitter.com/abr_grupo" target="_blank" class="mx-1">
-                    <img src="../assets/icons/twitter.svg" alt="Twitter ABR Grupo consultor">
-                </a>
-                <a href="" target="_blank" class="mx-1">
-                    <img src="../assets/icons/whatsapp.svg" alt="Correo ABR Grupo consultor">
-                </a> 
-                <a href="https://www.abrgrupoconsultor.pe/webmail" target="_blank" class="mx-1">
-                    <img src="../assets/icons/mail.svg" alt="Correo ABR Grupo consultor" class="mx-1">
-                </a> 
-            </div> -->
+                    <div class="col-md-6">
+                        <div class="footer__social-container">
+                            <h3 class="footer__title mb-3">Nuestras redes sociales</h3>
+
+                            <section>
+                                <a href="" class="footer__social-icon">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                                <a href="" class="footer__social-icon">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="" class="footer__social-icon">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+        
     </div>
 </footer>
 </template>
 
 <script>
+// Queries
+import contact from '@/apollo/queries/contact'
+
 export default {
-    
+    apollo: {
+        page: {
+            prefetch: true,
+            query: contact
+        }
+    }
 }
 </script>
 
@@ -66,8 +79,7 @@ export default {
     background-image: url('https://usmp.edu.pe/posgrado/images/maestria_derecho_registral.jpg');
     background-size: cover;
     margin-top: 5rem;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 3rem 0;
     position: relative;
 
     @media (min-width: 720px) {
@@ -83,41 +95,29 @@ export default {
         top: 0;
         left: 0;
     }
-    
-    &__content {
-        max-width: 80%;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 150px 1fr;
-        grid-gap: 1rem;
-        margin: 0 auto;
-        padding: 1rem;
-        z-index: 100;
-        text-align: center;
-
-        @media (min-width: 720px) {
-            max-width: 70%;
-            grid-template-columns: .7fr 1fr;
-            grid-template-rows: 1fr;
-            text-align: left;
-        }
-
-        @media (min-width: 1024px) {
-            max-width: 60%;
-        }
-    }
 
     &__title {
-        font-size: 1.3em;
+        font-size: 1.2em;
+        font-weight: 700;
         color: white;
-    }
+        display: inline-block;
 
-    .description {
-        font-size: 1em;
-        margin: 0;
+        position: relative;
+
+        &::before {
+            content: '';
+            background-color: $warning;
+            width: 2rem;
+            height: 3px;
+
+            position: absolute;
+            bottom: -.5rem;
+            left: 0;
+        }
     }
 
     &__icon {
+        width: 1.5rem;
         color: rgba($warning, .9);
         transition: color .5s;
 
@@ -126,38 +126,15 @@ export default {
         }
     }
 
-    &__logo-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 100;
-    }
+    &__social-icon {
+        width: auto;
+        font-size: 1.5rem;
+        color: rgba(white, .7);
+        transition: color .5s;
+        margin: 0 .3rem;
 
-    &__info-container {
-        z-index: 100;
-        padding-bottom: 1rem;
-        border-bottom: 3px solid rgba($warning, .9);
-
-        @media (min-width: 720px) {
-            margin-top: 0;
-        }
-    }
-
-    .footer__logo {
-        width: 100%;
-
-        @media (min-width: 1024px) {
-            width: 80%;
-        }
-    }
-}
-
-.footer__social {
-    img {
-        max-width: 8%;
-
-        @media (min-width: 720px) {
-            max-width: 6%;
+        &:hover {
+            color: white;
         }
     }
 }

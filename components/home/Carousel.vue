@@ -74,7 +74,9 @@ export default {
     },
     methods: {
         setCurrentItem() {
-            this.currentItem = this.reverseItems[this.currentIndex]
+            if(this.reverseItems) {
+                this.currentItem = this.reverseItems[this.currentIndex]
+            }
         },
         changeByInterval() {
             setInterval(() => {

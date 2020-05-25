@@ -6,7 +6,7 @@
                 <h2 class="values__title mb-5">Nuestros principales valores</h2>
             </div>
         </div>
-        <div class="row justify-content-center values__list mt-5">
+        <div class="row justify-content-center values__list mt-lg-5">
             <div class="col-md-4 col-lg-3 mb-3" v-for="(value, index) in values" :key="index">
                 <div class="value py-5">
                     <span class="value__icon">

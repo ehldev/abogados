@@ -1,10 +1,11 @@
 <template>
   <div v-if="page">
-    <banner></banner>
+    <banner :pageData="page"></banner>
     <description :image="page.featuredImage.mediaItemUrl" :info="page.nosotros.informacion" :mission="page.nosotros.mision" :vission="page.nosotros.vision"></description>
     <values :values="values"></values>
+    <representative></representative>
     <testimonies></testimonies>
-    <to-action :info="page.nosotros.frase"></to-action>
+    <to-action></to-action>
     <footer-app></footer-app>
   </div>
 </template>
@@ -12,6 +13,7 @@
 <script>
 import Banner from '@/components/about/Banner'
 import Description from '@/components/about/Description'
+import Representative from '@/components/about/Representative'
 import Values from '@/components/about/Values'
 import Testimonies from '@/components/about/Testimonies'
 import ToAction from '@/components/global/ToAction'
@@ -31,6 +33,7 @@ export default {
   components: {
     Banner,
     Description,
+    Representative,
     Values,
     ToAction,
     Testimonies,

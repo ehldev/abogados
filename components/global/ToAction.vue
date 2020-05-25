@@ -1,13 +1,8 @@
 <template>
-<section class="container-fluid to-action">
+<section class="container-fluid to-action" v-if="page">
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
-            <div v-html="info" v-if="info" class="to-action__info"></div>
-            
-            <p class="to-action__description lead mt-3" v-else>
-                Nuestra firma, busca cultivar la confianza, transparencia, responsabilidad, Integridad, disponibilidad al cambio, pasión y transformación de valores que nuestra sociedad espera, pensando en un mundo mejor.
-            </p>
-
+            <div v-html="page.nosotros.frase" class="to-action__info"></div>
             <nuxt-link to="/contacto" class="btn btn-lg btn-warning mt-3">Contáctanos</nuxt-link>
         </div>
     </div>
@@ -15,8 +10,17 @@
 </template>
 
 <script>
+// Queries
+import toAction from '@/apollo/queries/to-action'
+
 export default {
-    props: ['info']
+    /* props: ['info'] */
+    apollo: {
+        page: {
+            prefetch: true,
+            query: toAction
+        }
+    }
 }
 </script>
 

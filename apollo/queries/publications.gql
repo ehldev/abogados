@@ -1,0 +1,14 @@
+{
+  publicaciones{
+    nodes {
+      title
+      video{
+        url
+        capaVideo{
+          mediaItemUrl
+          altText
+        }
+      }
+    }
+  }
+}

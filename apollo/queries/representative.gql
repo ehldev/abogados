@@ -1,0 +1,11 @@
+{
+  page(id: "cGFnZToxNQ==") {
+    nosotros{
+      representante1
+      rol1
+      foto1{
+        mediaItemUrl
+      }
+    }
+  }
+}

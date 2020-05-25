@@ -1,0 +1,17 @@
+{
+  page(id: "cGFnZToxOA==") {
+    id
+    title
+    featuredImage {
+      mediaItemUrl
+    }
+    contacto{
+      imagenOficina{
+        mediaItemUrl
+      }
+      telefono
+      direccion
+      mapa
+    }
+  }
+}

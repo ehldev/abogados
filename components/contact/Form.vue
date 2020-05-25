@@ -15,7 +15,7 @@
                     <span class="icon mr-2">
                         <i class="fas fa-mobile-alt"></i>
                     </span>
-                    <span class="contact__item-content">928 351 168</span>
+                    <span class="contact__item-content">{{ pageData.contacto.telefono }}</span>
                 </p>
 
                 <!--Email -->
@@ -27,69 +27,142 @@
                 </p>
 
                 <!--Dirección -->
-                <p class="contact__item mb-3">
-                    <span class="icon mr-1">
+                <p class="contact__item mb-3 d-flex">
+                    <span class="icon mr-2">
                         <i class="fas fa-map-marker-alt"></i>
                     </span>
-                    <span class="contact__item-content">Jr. Don Bosco N° 436, Departamento 201 - Breña, Lima.</span>
+                    <span class="contact__item-content">{{ pageData.contacto.direccion }}</span>
                 </p>
 
             </div>
         </div>
         <div class="col-lg-6">
-            <v-app>
-                <v-form ref="form" @submit.prevent="submit()">
+            <v-app v-if="!formSend">
+                <v-form
+                    ref="form"
+                    v-model="valid"
+                    lazy-validation>
+
                     <v-text-field
                         v-model="name"
                         label="Nombre completo"
                         filled
+                        :rules="fieldRequired"
                     ></v-text-field>
 
                     <v-text-field
                         v-model="email"
                         label="Correo electrónico"
                         filled
+                        :rules="emailRules"
                     ></v-text-field>
 
                     <v-text-field
-                        v-model="affair"
+                        v-model="phone"
+                        label="Número de contacto"
+                        filled
+                        :rules="fieldRequired"
+                    ></v-text-field>
+
+                    <v-text-field
+                        v-model="subject"
                         label="Asunto"
                         filled
+                        :rules="fieldRequired"
                     ></v-text-field>
 
                     <v-textarea
+                    v-model="message"
                     filled
                     name="input-7-4"
                     label="Mensaje"
+                    :rules="fieldRequired"
                     ></v-textarea>
 
                     <div class="form-group text-right">
-                        <input type="submit" class="btn btn-lg btn-warning px-5">
+                        <button @click.prevent="validate()" :disabled=" loading ? true : false " class="btn btn-lg btn-warning text-white px-5">{{ loading ? 'Enviando...' : 'Enviar mensaje' }}</button>
                     </div>
                 </v-form>
             </v-app>
+            
+            <div class="send-message" v-else>
+                <h2 class="send-message__title">Gracias por su mensaje. Ha sido enviado.</h2>
+            </div>
         </div>
     </div>
 
     <!-- Maps -->
-    <div class="row mt-5">
+    <div class="row maps">
         <div class="col-md-12">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d975.4407723242143!2d-77.04780537084102!3d-12.05981488795932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8dcf2ff8b29%3A0x502033c9f2472833!2sNATBIO%20SAC!5e0!3m2!1ses-419!2spe!4v1590004895579!5m2!1ses-419!2spe" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            <div v-html="pageData.contacto.mapa"></div>
         </div>
     </div>
 </div>
 </template>
 
 <script>
+/* import api from '@/services/api' */
+
 export default {
     data() {
         return {
-            name: ''
+            name: '',
+            email: '',
+            phone: '',
+            subject: '',
+            message: '',
+            formSend: false,
+            loading: false,
+            valid: true,
+            emailRules: [
+                v => !!v || 'El correo es requerido',
+                v => /.+@.+\..+/.test(v) || 'El correo debe contener @',
+            ],
+            fieldRequired: [
+                v => !!v || 'Este campo es requerido'
+            ]
         }
     },
+    props: ['pageData'],
     methods: {
-        submit() {
-            alert('En progreso')
+        validate() {
+            if(this.$refs.form.validate()) {
+                this.loading = true
+
+                let data = {
+                    'your-name': this.name,
+                    'your-email': this.email,
+                    'your-celular': this.phone,
+                    'your-subject': this.subject,
+                    'your-message': this.message
+                }
+
+                let url = 'https://abogados.josejollja.com/wp-json/contact-form-7/v1/contact-forms/67/feedback'
+
+                let formData = new FormData()
+                formData.append('your-name', this.name)
+                formData.append('your-email', this.email)
+                formData.append('your-celular', this.phone)
+                formData.append('your-subject', this.subject)
+                formData.append('your-message', this.message)
+
+                if(this.name && this.email && this.phone && this.subject && this.message) {
+                    fetch(url, {
+                        method: 'POST', // or 'PUT'
+                        body: formData // data can be `string` or {object}!
+                    }).then(res => res.json())
+                    .catch(error => {
+                        this.formError = true
+                        this.loading = false
+                    })
+                    .then(response => {
+                        if(response.status === 'mail_sent') {
+                            this.formSend = true
+                            this.loading = false
+                        }
+                    });
+                }
+            }
         }
     }
 }
@@ -100,7 +173,6 @@ export default {
 
 .contact {
     margin-top: 5rem;
-    margin-bottom: 10rem;
 
     &__subtitle {
         font-size: 1em;
@@ -117,6 +189,10 @@ export default {
     &__description {
         font-size: 1em;
         color: rgba(white, .7)
+    }
+
+    iframe {
+        width: 100%;
     }
 }
 
@@ -142,6 +218,12 @@ export default {
     }
 }
 
+.send-message__title {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: $dark;
+}
+
 .icon {
     color: $warning;
     font-weight: 700;
@@ -149,5 +231,9 @@ export default {
 
 .theme--light.v-application {
     max-height: 500px;
+}
+
+.maps {
+    margin-top: 7rem;
 }
 </style>

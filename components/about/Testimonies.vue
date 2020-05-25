@@ -1,62 +1,39 @@
 <template>
-<div class="testimonies bg-dark">
+<div class="testimonies bg-dark" v-if="testimoniales">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <div class="testimonies__content mb-5 px-1">
                     <h2 class="testimonies__title">Conozca que opinan nuestros clientes</h2>
-                    <!-- <pre>
-                        {{ testimoniales.nodes }}
-                    </pre> -->
                 </div>
             </div>
 
             <div class="col-md-8">
-                <b-carousel
-                    id="carousel-fade"
-                    style="text-shadow: 0px 0px 2px #000"
-                    fade
-                    indicators
-                    :interval="4000000"
-                    v-if="testimoniales"
-                >
-                    <b-carousel-slide
-                    class="testimonies__carousel-item h-100"
-                    v-for="(item, index) in testimoniales.nodes"
-                    :key="index"
-                    >
-                        <h3 class="testimonies__carousel-title text-left mb-3">{{ item.title }}</h3>
+                <!-- Los estilos básicos de este carousel se encuentran en components/home/Carousel.vue -->
+                <section class="carousel testimonies__carousel  py-5">
+                    <transition-group name="fade">
+                        <template v-if="initAnimated">
+                            <div class="carousel__item py-5" v-for="(item, index) in testimoniales.nodes" :key="index" :class="index === currentIndex ? 'carousel__item--active' : ''">
+                                <div class="carousel__item-content">
 
-                        <p class="testimonies__carousel-description text-left" v-html="item.content">
-                        </p>
+                                    <!-- Contenido personalizado aquí, puedes acceder al contenido del item actual mediante la propiedad currentItem -->
+                                    <div class="carousel__content-custom">
+                                        <h1 class="testimonies__carousel-title">{{ item.title }}</h1>
+                                        
+                                        <div v-html="item.content" class="testimonies__carousel-description mt-3 py-0"></div>
+                                    </div>
 
-                        <i class="fas fa-quote-left testimonies__icon"></i>
-                    </b-carousel-slide>
+                                </div>
+                            </div>
+                        </template>
+                    </transition-group>
 
-                    <!-- <b-carousel-slide
-                    class="testimonies__carousel-item"
-                    >
-                        <h3 class="testimonies__carousel-title text-left mb-3">Jon Doe, cliente 2.</h3>
-
-                        <p class="testimonies__carousel-description text-left">
-                            Lorem ipsum 2 dolor sit amet consectetur adipisicing elit. Magnam dignissimos sed animi soluta doloremque voluptas quisquam in et obcaecati blanditiis culpa explicabo delectus a nobis, quos alias molestiae id eligendi.
-                        </p>
-
-                        <i class="fas fa-quote-left testimonies__icon"></i>
-                    </b-carousel-slide>
-
-                    <b-carousel-slide
-                    class="testimonies__carousel-item"
-                    >
-                        <h3 class="testimonies__carousel-title text-left mb-3">Cliente 3.</h3>
-
-                        <p class="testimonies__carousel-description text-left">
-                            Lorem ipsum 3 dolor sit amet consectetur adipisicing elit. Magnam dignissimos sed animi soluta doloremque voluptas quisquam in et obcaecati blanditiis culpa explicabo delectus a nobis, quos alias molestiae id eligendi.
-                        </p>
-
-                        <i class="fas fa-quote-left testimonies__icon"></i>
-                    </b-carousel-slide> -->
-                </b-carousel>
+                    <div class="carousel__points">
+                        <div class="carousel__points-container">
+                            <button class="carousel__point" :class="index === currentIndex ? 'carousel__point--active' : ''" v-for="(item, index) in testimoniales.nodes.length" :key="index" @click="changeCurrentIndex(index)"></button>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -67,12 +44,53 @@
 import testimoniales from '@/apollo/queries/testimoniales'
 
 export default {
+    data() {
+        return {
+            currentItem: {},
+            currentIndex: 0,
+            initAnimated: false,
+            currentTime: 4000
+        }
+    },
+    mounted() {
+        // Asigna la primera imagen
+        this.setCurrentItem()
+
+        this.changeByInterval()
+
+        // Controla el fade del inicio
+        this.initAnimated = true
+    },
     apollo: {
         testimoniales: {
             prefetch: true,
             query: testimoniales
         }
-    }
+    },
+    methods: {
+        setCurrentItem() {
+            if(this.testimoniales) {
+                this.currentItem = this.testimoniales.nodes[this.currentIndex]
+            }
+        },
+        changeByInterval() {
+            setInterval(() => {
+                // Aumenta en 1 el index
+                if(this.currentIndex < (this.testimoniales.nodes.length - 1)) {
+                    this.currentIndex++
+                } else {
+                    this.currentIndex = 0
+                }
+
+                this.currentItem = this.testimoniales.nodes[this.currentIndex]
+            }, this.currentTime)
+        },
+        changeCurrentIndex(index) {
+            this.currentItem = this.testimoniales.nodes[index]
+
+            this.currentIndex = index
+        }
+    },
 }
 </script>
 
@@ -81,11 +99,13 @@ export default {
 
 .testimonies {
     margin-top: 6rem;
-    padding-top: 6rem;
-    padding-bottom: 5rem;
-
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    
     @media (min-width: 720px) {
-        margin-top: 7rem;
+        margin-top: 5rem;
+        padding-top: 6rem;
+        padding-bottom: 5rem;
     }
 
     &__title {
@@ -107,40 +127,45 @@ export default {
         border-bottom: 3px solid $warning;
     }
 
-    &__carousel-item {
-        background-color: $dark;
-        min-height: 150px;
-        position: relative;
+    /*
+        Los estilos básicos de este carousel se encuentran en components/home/Carousel.vue,
+        aquí solo se modifica lo necesario.
+    */
+
+    &__carousel {
+        height: 250px;
+
+        @media (min-width: 1024px) {
+          height: 200px;
+        }
     }
 
-    &__carousel-description {
-        color: rgba(white, .9);
-    }
+    .carousel__points {
 
-    .carousel-indicators li {
-        width: 1.2em;
-        height: .3em;
-        border-radius: 40%;
-        opacity: 1;
-        outline: none;
-    }
+        @media (min-width: 1024px) {
+          bottom: .5rem;
+        }
 
-    .carousel-indicators {
-        bottom: -30%;
-    }
-
-    .carousel-indicators .active {
-        background-color: $warning;
-    }
-
-    .carousel-caption {
-        height: 100%;
+        width: 100%;
+        padding: .5rem 1rem;
     }
 
     &__carousel-title {
         font-size: 1em;
         font-weight: 700;
         color: $warning;
+    }
+
+    &__carousel-description {
+        color: white;
+
+        p::before {
+            content: open-quote;
+        }
+
+        p::after {
+            content: close-quote;
+        }
     }
 }
 

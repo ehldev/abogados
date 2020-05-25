@@ -11,18 +11,6 @@
                         <h2 class="about-description__title mb-3">Rikell Vargas & Tuesta</h2>
 
                         <div v-html="info" v-if="info" class="about-description__info-api px-lg-1"></div>
-
-                        <!-- <p class="about-description__description">
-                            La firma Rikell Vargas & Tuesta, constituye un espacio desde el cual nos desempeñamos en el asesoramiento en temas penales de manera eficiente y eficaz. Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente. Nuestro propósito es el asesoramiento permanente y sobre todo, responsable en la solución de sus conflictos.
-                        </p>
-
-                        <p class="about-description__description">
-                            Somos expertos en el área de criminalística, teniendo en cuenta que en la actualidad, con la entrada del nuevo ordenamiento procesal, dicha rama científica se ha convertido en el pilar de donde emanan un cumulo de datos que requieren ser analizados por expertos dependiendo de la especialidad y naturaleza del delito.
-                        </p>
-
-                        <p class="about-description__description">
-                            Nos desempeñamos en el análisis de estudios científicos de escenas de crímenes, en especial en los delitos violentos, que hoy en día aquejan y flagelan a la sociedad. Una buena investigación abre el camino para el éxito en el juicio oral.
-                        </p> -->
                     </div>
                 </div>
             </div>
@@ -45,13 +33,6 @@
 
                         <div v-html="mission" v-if="mission" class="mission__info mt-3"></div>
 
-                        <!-- <p class="mission__description mb-0">
-                            Alcanzar una actividad de asesoría y consultoría legal especializada en el campo penal y su plataforma de las ciencias forenses.
-                        </p>
-
-                        <p class="my-0">
-                            Pues bien, se busca posesionarse como una firma legal de elevado prestigio.
-                        </p> -->
                     </div>
                 </div>
             </div>
@@ -68,9 +49,6 @@
 
                         <div v-html="vission" v-if="vission" class="mission__info mt-3"></div>
 
-                        <!-- <p class="mission__description">
-                            La firma Rikell Vargas & Tuesta, tienen un enorme y ambicioso propósito de contribuir al desarrollo y correcta administración de justicia, velar por los derechos de los justiciables, propósitos que son confiados en un equipo especializado y sobre todo responsable. 
-                        </p> -->
                     </div>
                 </div>
             </div>
@@ -90,7 +68,10 @@ export default {
 @import '../../scss/bootstrap_custom';
 
 .about-description {
-    margin-top: 5rem;
+    
+    @media (min-width: 720px) {
+        margin-top: 5rem;
+    }
 
     &__info-api {
         span,
@@ -103,10 +84,11 @@ export default {
 .about-description__content {
     display: grid;
     grid-template-columns: 1fr;
-    /* grid-gap: 1rem; */
+    grid-template-rows: 2fr auto;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1200px) {
         grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
     }
 }
 
@@ -116,6 +98,13 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+
+    @media (min-width: 1200px) {
+        grid-column: 2 / 3;
+    }
 }
 
 .about-description__title {
@@ -137,6 +126,13 @@ export default {
     position: relative;
     min-height: 400px;
     box-shadow: 6px 10px 27px -3px rgba(0,0,0,0.61);
+
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+
+    @media (min-width: 1200px) {
+        grid-row: 1 / 2;
+    }
 
     &::before {
         content: '';
