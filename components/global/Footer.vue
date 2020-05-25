@@ -35,14 +35,14 @@
                         <div class="footer__social-container">
                             <h3 class="footer__title mb-3">Nuestras redes sociales</h3>
 
-                            <section>
-                                <a href="" class="footer__social-icon">
+                            <section v-if="redesSociales">
+                                <a :href="redesSociales.edges[0].node.redes.facebook" target="_blank" class="footer__social-icon">
                                     <i class="fab fa-facebook"></i>
                                 </a>
-                                <a href="" class="footer__social-icon">
-                                    <i class="fab fa-twitter"></i>
+                                <a :href="redesSociales.edges[0].node.redes.youtube" target="_blank" class="footer__social-icon">
+                                    <i class="fab fa-youtube"></i>
                                 </a>
-                                <a href="" class="footer__social-icon">
+                                <a :href="redesSociales.edges[0].node.redes.whatsapp" target="_blank" class="footer__social-icon">
                                     <i class="fab fa-whatsapp"></i>
                                 </a>
                             </section>
@@ -64,6 +64,10 @@ import contact from '@/apollo/queries/contact'
 export default {
     apollo: {
         page: {
+            prefetch: true,
+            query: contact
+        },
+        redesSociales: {
             prefetch: true,
             query: contact
         }

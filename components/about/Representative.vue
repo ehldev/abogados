@@ -22,8 +22,8 @@ import representative from '@/apollo/queries/representative'
 export default {
     apollo: {
       page: {
-          prefetch: true,
-          query: representative
+        prefetch: true,
+        query: representative
       }
     }
 }

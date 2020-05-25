@@ -13,5 +13,16 @@
       direccion
       mapa
     }
+  },
+  redesSociales {
+    edges {
+      node {
+        redes{
+          facebook
+          youtube
+          whatsapp
+        }
+      }
+    }
   }
 }
