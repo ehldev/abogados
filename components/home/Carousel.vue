@@ -1,39 +1,37 @@
 <template>
-<div class="banner">
+<div class="banner" v-if="sliders">
     <!-- <header-app logo="white"></header-app> -->
     <header-app></header-app>
 
-    <b-carousel
-      id="carousel-1"
-      v-model="slide"
-      :interval="3000"
-      indicators
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd"
-      class="home-carousel"
-      v-if="sliders"
-    >
+<!-- v-bind:style="{backgroundImage: 'url(' + setImageBackgroundInSlideTransition + ')'}" -->
+<!-- La primera clase "carousel" es importante la segunda puede llamarse como desees y tiene que definir la altura
+ya que por defecto el carousel no tiene una altura para mejor personalización -->
 
-      <!-- Slides with custom text -->
-      <b-carousel-slide class="home-slide first-slide" v-for="(item, index) in reverseItems" :key="index" :img-src="item.portada.imagenDestacada.mediaItemUrl" :img-alt="item.portada.imagenDestacada.mediaItemUrl">
-        <div class="row">
-            <div class="col-md-9 col-lg-6 text-left px-lg-0">
-              <h2 class="home-carousel__title">{{ item.title }}</h2>
+<section class="carousel carousel-custom">
+    <transition-group name="fade">
+        <template v-if="initAnimated">
+            <div class="carousel__item" v-for="(item, index) in reverseItems" :key="index" :class="index === currentIndex ? 'carousel__item--active' : ''">
+                <div class="carousel__item-content">
 
-              <div class="home-carousel__content">
-                <p class="home-carousel__description text-white mt-3" v-html="item.content">
-                </p>
-    
+                    <!-- Contenido personalizado aquí, puedes acceder al contenido del item actual mediante la propiedad currentItem -->
+                    <div class="carousel__content-custom mt-md-5 mt-xl-0">
+                        <h1 class="carousel__title">{{ item.title }}</h1>
+                        
+                        <div v-html="item.content" class="carousel__description mt-3 py-0"></div>
+                    </div>
 
-                <div class="text-right mt-4">
-                  <nuxt-link to="/sobre-nosotros" class="btn btn-outline-warning">Más información</nuxt-link>
                 </div>
-              </div>
+                <img :src="item.portada.imagenDestacada.mediaItemUrl" :alt="item.portada.imagenDestacada.altText" class="carousel__image">
             </div>
-        </div>
-      </b-carousel-slide>
+        </template>
+    </transition-group>
 
-    </b-carousel>
+    <div class="carousel__points">
+        <div class="carousel__points-container">
+            <button class="carousel__point" :class="index === currentIndex ? 'carousel__point--active' : ''" v-for="(item, index) in reverseItems.length" :key="index" @click="changeCurrentIndex(index)"></button>
+        </div>
+    </div>
+</section>
 </div>
 </template>
 
@@ -49,8 +47,21 @@ export default {
     data() {
         return {
             slide: 0,
-            sliding: null
+            sliding: null,
+            currentItem: {},
+            currentIndex: 0,
+            initAnimated: false,
+            currentTime: 4000
         }
+    },
+    mounted() {
+        // Asigna la primera imagen
+        this.setCurrentItem()
+
+        this.changeByInterval()
+
+        // Controla el fade del inicio
+        this.initAnimated = true
     },
     apollo: {
       sliders: {
@@ -62,12 +73,26 @@ export default {
         HeaderApp
     },
     methods: {
-      onSlideStart(slide) {
-        this.sliding = true
-      },
-      onSlideEnd(slide) {
-        this.sliding = false
-      }
+        setCurrentItem() {
+            this.currentItem = this.reverseItems[this.currentIndex]
+        },
+        changeByInterval() {
+            setInterval(() => {
+                // Aumenta en 1 el index
+                if(this.currentIndex < (this.reverseItems.length - 1)) {
+                    this.currentIndex++
+                } else {
+                    this.currentIndex = 0
+                }
+
+                this.currentItem = this.reverseItems[this.currentIndex]
+            }, this.currentTime)
+        },
+        changeCurrentIndex(index) {
+            this.currentItem = this.reverseItems[index]
+
+            this.currentIndex = index
+        }
     },
     computed: {
       reverseItems: function() {
@@ -80,39 +105,162 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../scss/variables';
+@import '../../scss/_variables';
 
-.home-carousel {
+:root {
+    --dark: #2D3047;
+    --success: #419D78;
+    --secondary: #585866;
+    --danger: #B33951;
+}
 
-    .carousel-indicators li {
-        width: 1.2em;
-        height: .3em;
-        border-radius: 40%;
+.carousel {
+    background-color: var(--dark);
+    position: relative;
+    overflow: hidden;
+
+    width: 100%;
+
+    &__item {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        /* right: -100%;
+        transition: right 1.5s; */
+        transition: opacity 1s;
+        opacity: 0;
+    }
+
+    &__item--active {
         opacity: 1;
+        z-index: 10;
+        /* right: 0; */
+    }
+
+    &__item-content {
+        /* Este es el efecto oscuro del item */
+        background-color: rgba(#2D3047, .7);
+        width: 100%;
+        height: 100%;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        z-index: 100;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+
+        object-position: center;
+        object-fit: cover;
+    }
+
+    &__points {
+        position: absolute;
+        bottom: 1rem;
+        left: 0;
+        z-index: 100;
+
+        width: 100%;
+        padding: .5rem 1rem;
+    }
+
+    &__points-container {
+        width: max-content;
+        margin: 0 auto;
+        display: flex;
+    }
+
+    &__point {
+        background-color: rgba($warning, .3);
+
+        width: .9rem;
+        height: .9rem;
+
+        margin: 0 .3rem;
+        border-radius: 50%;
+        border: none;
+
         outline: none;
-    }
 
-    .carousel-indicators .active {
-        background-color: $warning;
-    }
+        transition: background-color .5s;
 
-    .carousel-caption {
-        top: 25%;
-        left: 10%;
+        &:hover {
+            background-color: var(--dark);
 
-        @media (min-width: 1024px) {
-          top: 30%;
-          left: 12%;
+            cursor: pointer;
         }
     }
 
-    &__content {
-      @media (min-width: 1200px) {
-        max-width: 90%;
-      }
+    /* Estilos del punto activo */
+
+    &__point--active {
+        background-color: $warning;
+
+        &:hover {
+            background-color: $warning;
+        }
+    }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+/* @keyframes slideItem {
+    from {
+        opacity: 1;
     }
 
-    &__title {
+    to {
+        opacity: 0;
+    }
+} */
+
+/* Estilos adicionales, el único estilo importante es la altura */
+.carousel-custom {
+    height: 100vh; /* Importante: Definir altura */
+
+    @media (min-width: 720px) {
+      height: 60vh;
+    }
+
+    @media (min-width: 1200px) {
+      height: 100vh;
+    }
+}
+
+.carousel__content-custom {
+    width: 80%;
+    height: 100%;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .carousel__title {
+        font-size: 4em;
+        color: white;
+    }
+}
+
+.carousel__point {
+  outline: none !important;
+}
+
+.carousel__title {
       font-size: 1.5em;
       font-weight: 800;
 
@@ -126,83 +274,26 @@ export default {
       }
     }
 
-    &__description {
+.carousel__description {
       background-color: rgba($dark, .07);
+      color: white;
       font-size: 1em;
       font-weight: 400;
       padding: 1rem;
       border-left: 4px solid $warning;
       transition: background-color .5s;
 
+      @media (min-width: 720px) {
+        width: 80%;
+      }
+
+      @media (min-width: 1024px) {
+        width: 50%;
+      }
+
       &:hover {
         background-color: rgba($dark, .09);
       }
 
     }
-}
-
-.home-slide {
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    position: relative;
-    background-color: $dark;
-    height: 90vh;
-
-    @media (min-width: 720px) {
-      height: 60vh;
-    }
-
-    @media (min-width: 1024px) {
-      height: 60vh;
-    }
-
-    @media (min-width: 1200px) {
-      height: 100vh;
-    }
-
-    img {
-      height: 100%;
-    }
-
-    &::before {
-        content: '';
-        /* background: rgb(39,72,133);
-        background: linear-gradient(90deg, rgba(39,72,133,1) 0%, rgba(39,72,133,0.13769257703081228) 100%); */
-        background-color: rgba($dark, .7);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-}
-
-.first-slide {
-  background-image: url('/slide-home/first-slide.jpg');
-  
-  @media (min-width: 720px) {
-    background-image: url('/slide-home/first-slide.jpg');
-  }
-  
-}
-
-.second-slide {
-  background-image: url('/slide-home/second-slide.jpg');
-  background-position: center;
-
-  @media (min-width: 720px) {
-    background-image: url('/slide-home/second-slide.jpg');
-  }
-}
-
-.third-slide {
-  background-image: url('/slide-home/third-slide.jpg');
-  background-position: left;
-
-  @media (min-width: 720px) {
-    background-image: url('/slide-home/third-slide.jpg');
-    background-position: center;
-  }
-}
 </style>

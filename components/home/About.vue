@@ -1,7 +1,7 @@
 <template>
 <section class="container home-about">
     <div class="row justify-content-center">
-        <div class="col-md-12 bg-dark px-0">
+        <div class="col-md-12 bg-dark p-0">
             <div class="home-about__content">
                 <div class="home-about__info">
                     <h2 class="home-about__title mb-3">Sobre nosotros</h2>
