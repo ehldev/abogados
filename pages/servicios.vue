@@ -8,6 +8,9 @@
 </template>
 
 <script>
+import { config } from '@/env'
+
+// Components
 import Banner from '@/components/services/Banner'
 import Description from '@/components/services/Description'
 import ToAction from '@/components/global/ToAction'
@@ -30,20 +33,30 @@ export default {
   },
   head() {
     let title = 'Nuestros servicios - Rikell Vargas & Tuesta',
-      description = 'Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.'
+      description = 'Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.',
+      appUrl = config.appUrl
+
+    let image = ''
+
+    if(this.page) {
+      image = this.page.featuredImage.mediaItemUrl
+    }
       
-      return {
+    return {
         title: title,
         meta: [
-          // Twitter OpenGraph
-          {name: 'twitter:title', content: title},
-          {name: 'twitter:description', content: description},
-
           // Facebook OpenGraph
-          {property: 'og:url', content: 'https://abogados.josejollja.com/servicios'},
+          {property: 'og:url', content: `${appUrl}/servicios`},
           {property: 'og:title', content: title},
           {property: 'og:site_name', content: title},
-          {property: 'og:description', content: description}
+          {property: 'og:description', content: description},
+          {property: 'og:image', content: image},
+
+          // Twitter OpenGraph
+          {name: 'twitter:url', content: `${appUrl}/servicios`},
+          {name: 'twitter:image', content: image},
+          {name: 'twitter:title', content: title},
+          {name: 'twitter:description', content: description}
         ]
       }
   },

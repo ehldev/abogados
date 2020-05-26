@@ -11,6 +11,9 @@
 </template>
 
 <script>
+import { config } from '@/env'
+
+// Components
 import Banner from '@/components/about/Banner'
 import Description from '@/components/about/Description'
 import Representative from '@/components/about/Representative'
@@ -41,20 +44,30 @@ export default {
   },
   head() {
     let title = 'Sobre nosotros - Rikell Vargas & Tuesta',
-      description = 'La firma Rikell Vargas & Tuesta, constituye un espacio desde el cual nos desempeñamos en el asesoramiento en temas penales de manera eficiente y eficaz. Somos expertos en el ámbito del litigio.'
+      description = 'La firma Rikell Vargas & Tuesta, constituye un espacio desde el cual nos desempeñamos en el asesoramiento en temas penales de manera eficiente y eficaz. Somos expertos en el ámbito del litigio.',
+      appUrl = config.appUrl
+
+    let image = ''
+
+    if(this.page) {
+      image = this.page.featuredImage.mediaItemUrl
+    }
       
-      return {
+    return {
         title: title,
         meta: [
-          // Twitter OpenGraph
-          {name: 'twitter:title', content: title},
-          {name: 'twitter:description', content: description},
-
           // Facebook OpenGraph
-          {property: 'og:url', content: 'https://abogados.josejollja.com/sobre-nosotros'},
+          {property: 'og:url', content: `${appUrl}/sobre-nosotros`},
           {property: 'og:title', content: title},
           {property: 'og:site_name', content: title},
-          {property: 'og:description', content: description}
+          {property: 'og:description', content: description},
+          {property: 'og:image', content: image},
+
+          // Twitter OpenGraph
+          {name: 'twitter:url', content: `${appUrl}/sobre-nosotros`},
+          {name: 'twitter:image', content: image},
+          {name: 'twitter:title', content: title},
+          {name: 'twitter:description', content: description}
         ]
       }
   },

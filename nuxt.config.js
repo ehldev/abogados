@@ -12,11 +12,13 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { hid: 'description', name: 'description', content: 'Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.' },
+      /* Facebook meta */
       { hid: 'fbtype', property: 'og:type', content: 'website' },
+
       /* Twitter meta */
-      { hid: 'twcard', property: 'twitter:card', content: 'https://abogados.josejollja.com/wp-content/uploads/2020/05/logo-abogado.png' },
-      { hid: 'twimage', property: 'twitter:image', content: 'https://abogados.josejollja.com/wp-content/uploads/2020/05/logo-abogado.png' }    ],
+      { hid: 'twcard', property: 'twitter:card', content: 'summary' }
+    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap' },
