@@ -1,5 +1,5 @@
 <template>
-<footer class="footer" v-if="page">
+<footer class="footer" v-if="redesSociales">
     <div class="footer__content container">
         <div class="row">
             <div class="col-md-4">
@@ -11,23 +11,23 @@
                     <div class="col-md-6">
                         <h3 class="footer__title mb-3">Estudio Rikell Vargas & Tuesta</h3>
                         <p class="description text-white mb-2 d-flex justify-content-center justify-content-md-start mt-3">
-                            <span class="footer__icon mr-md-2">
+                            <span class="footer__icon mr-md-1">
                                 <i class="fas fa-map-marker-alt"></i>
                             </span>
-                            {{ page.contacto.direccion }}
+                            {{ redesSociales.edges[0].node.redes.direccion }}
                         </p>
                         <p class="description text-white mb-2 d-flex justify-content-center justify-content-md-start">
                             <span class="footer__icon">
                                 <i class="fas fa-mobile-alt"></i>
                             </span>
                             
-                            {{ page.contacto.telefono }}
+                            {{ redesSociales.edges[0].node.redes.celular }}
                         </p>
                         <p class="description text-white mb-2 d-flex justify-content-center justify-content-md-start">
                             <span class="footer__icon">
                                 <i class="far fa-envelope-open"></i>
                             </span>
-                            <a href="mailto:info@demolink.org" class="text-white">info@demolink.org</a>
+                            <a :href="`mailto:${redesSociales.edges[0].node.redes.correo.trim()}`" class="text-white">{{ redesSociales.edges[0].node.redes.correo }}</a>
                         </p>
                     </div>
 
@@ -59,17 +59,13 @@
 
 <script>
 // Queries
-import contact from '@/apollo/queries/contact'
+import contactInfo from '@/apollo/queries/contact-info'
 
 export default {
     apollo: {
-        page: {
-            prefetch: true,
-            query: contact
-        },
         redesSociales: {
             prefetch: true,
-            query: contact
+            query: contactInfo
         }
     }
 }

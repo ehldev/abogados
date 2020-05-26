@@ -10,7 +10,7 @@
 
             <div class="col-md-8">
                 <!-- Los estilos básicos de este carousel se encuentran en components/home/Carousel.vue -->
-                <section class="carousel testimonies__carousel  py-5">
+                <section class="carousel testimonies__carousel py-5" v-if="renderCarousel"> <!-- Se agrega renderCarousel para esperar a que se carguen los estilos correctamente, al parecer problema de nuxt -->
                     <transition-group name="fade">
                         <template v-if="initAnimated">
                             <div class="carousel__item py-5" v-for="(item, index) in testimoniales.nodes" :key="index" :class="index === currentIndex ? 'carousel__item--active' : ''">
@@ -49,7 +49,8 @@ export default {
             currentItem: {},
             currentIndex: 0,
             initAnimated: false,
-            currentTime: 4000
+            currentTime: 4000,
+            renderCarousel: false
         }
     },
     mounted() {
@@ -60,6 +61,10 @@ export default {
 
         // Controla el fade del inicio
         this.initAnimated = true
+
+        setTimeout(() => {
+            this.renderCarousel = true
+        }, 2000)
     },
     apollo: {
         testimoniales: {

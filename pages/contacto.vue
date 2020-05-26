@@ -1,7 +1,7 @@
 <template>
   <div v-if="page">
     <banner :pageData="page"></banner>
-    <form-contact :pageData="page"></form-contact>
+    <form-contact :ubication="page.contacto.direccion" :mapa="page.contacto.mapa"></form-contact>
     <footer-app></footer-app>
   </div>
 </template>
@@ -23,6 +23,12 @@ export default {
   head() {
     let title = 'Contacto - Rikell Vargas & Tuesta',
       description = 'Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.'
+
+    let image = ''
+
+    if(this.page) {
+      image = this.page.featuredImage.mediaItemUrl
+    }
       
       return {
         title: title,
@@ -35,7 +41,8 @@ export default {
           {property: 'og:url', content: 'https://abogados.josejollja.com/contacto'},
           {property: 'og:title', content: title},
           {property: 'og:site_name', content: title},
-          {property: 'og:description', content: description}
+          {property: 'og:description', content: description},
+          {property: 'og:image', content: image}
         ]
       }
   },

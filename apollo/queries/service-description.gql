@@ -1,0 +1,20 @@
+{
+  page(id: "cGFnZToyMA==") {
+    criminalistica{
+     imagen1{
+      mediaItemUrl
+      altText
+    }
+     imagen2{
+      mediaItemUrl
+      altText
+    }
+      imagen3{
+        mediaItemUrl
+        altText
+      }
+      descripcion
+      video
+    }
+  }
+}

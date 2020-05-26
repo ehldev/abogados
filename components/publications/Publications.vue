@@ -1,27 +1,51 @@
 <template>
 <div class="container publications-list" v-if="publicaciones">
-    <div class="row publication mt-5" v-for="(item, index) in publicaciones.nodes" :key="index">
-        <div class="col-md-5">
-            <div class="publication__content h-100">
-                <h2 class="publication__title">{{ item.title }}</h2>
+
+    <div class="row publication mb-5" :class=" (index % 2) === 0 ? 'row--invested' : '' " v-for="(item, index) in publicaciones.edges[0]" :key="index">
+        <!-- Esta columna se alterna según el index -->
+        <div class="col-md-5 first-column">
+            <div class="publication__content">
+                <div class="text-center text-md-left mb-5">
+                    <h2 class="publication__title">{{ item.title }}</h2>
+                </div>
+                <div v-html="item.content"></div>
             </div>
         </div>
-        <div class="col-md-7">
+
+        <!-- Video -->
+        <div class="col-md-7 second-column mt-5 mt-md-0">
             <div class="publication__video-container">
                 <div v-html="item.video.url" class="publication__video"></div>
 
-                <div class="publication__video-image" v-bind:style="{backgroundImage: 'url(' + item.video.capaVideo.mediaItemUrl + ')'}"></div>
+                <div class="publication__video-image" v-bind:style="{backgroundImage: 'url(' + item.video.capaVideo.mediaItemUrl + ')'}">
+                </div>
+            </div>
+
+            <div class="publication-images position-relative mt-5">
+                <gallery
+                :image="item.video.imagen1"
+                :image2="item.video.imagen2"
+                :image3="item.video.imagen3"
+                >
+                </gallery>
             </div>
         </div>
+
     </div>
+
 </div>
 </template>
 
 <script>
+import Gallery from '@/components/global/Gallery'
+
 // Queries
 import publications from '@/apollo/queries/publications'
 
 export default {
+    components: {
+        Gallery
+    },
     apollo: {
         publicaciones: {
             prefetch: true,
@@ -35,7 +59,10 @@ export default {
 @import '../../scss/variables';
 
 .publications-list {
-    margin-top: 3rem;
+
+    @media (min-width: 720px) {
+        margin-top: 5rem;
+    }
 
     iframe {
         width: 100%;
@@ -47,6 +74,7 @@ export default {
     &__content {
         height: max-content !important;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
@@ -58,20 +86,38 @@ export default {
         position: relative;
 
         @media (min-width: 720px) {
-            font-size: 2em;
+            font-size: 2.3em;
         }
 
         &::before {
             content: '';
             background-color: $warning;
 
-            width: 2rem;
+            width: 3rem;
             height: 4px;
 
+            margin: auto;
+
             position: absolute;
-            bottom: -.5rem;
+            
+            bottom: -1rem;
             left: 0;
+            right: 0;
+
+            @media (min-width: 720px) {
+                content: '';
+                background-color: $warning;
+
+                margin: 0;
+                width: 2rem;
+                height: 4px;
+
+                position: absolute;
+                bottom: -.5rem;
+                left: 0;
+            }
         }
+
     }
 
     &__video-container {
@@ -104,7 +150,39 @@ export default {
 
             opacity: 1;
 
-            transition: right 1s ease-out;
+            transition: right 1.3s ease-out;
+        }
+    }
+}
+
+.first-column {
+    margin-top: 20%;
+}
+
+/* Modificar columnas de filas para dar estilo diferenciado */
+.row--invested {
+
+    @media (min-width: 720px) {
+        .first-column {
+            order: 2;
+        }
+
+        .publication__video-image {
+            left: 0;
+            right: initial;
+            transition: left 1.3s ease-out;
+        }
+
+        .publication__video-container {
+
+            &:hover .publication__video-image {
+                left: -150%;
+            }
+
+            /* &:hover .publication__video {
+                position: relative;
+                z-index: 100;
+            } */
         }
     }
 }

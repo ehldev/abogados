@@ -1,13 +1,30 @@
 {
-  publicaciones{
-    nodes {
-      title
-      video{
-        url
-        capaVideo{
-          mediaItemUrl
-          altText
+  publicaciones {
+    edges {
+      node {
+        id
+        title
+        content
+        video {
+          url
+          capaVideo {
+            mediaItemUrl
+            altText
+          }
+          imagen1{
+            mediaItemUrl
+            altText
+          }
+          imagen2{
+            mediaItemUrl
+            altText
+          }
+          imagen3{
+            mediaItemUrl
+            altText
+          }
         }
+        
       }
     }
   }

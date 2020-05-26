@@ -12,14 +12,6 @@ import Carousel from '~/components/home/Carousel'
 import About from '~/components/home/About'
 import ToAction from '@/components/global/ToAction'
 import FooterApp from '@/components/global/Footer'
-/* import Characters from '~/apollo/queries/characters' */
-
-/* query Characters {
-  characters {
-    id
-    name
-  }
-} */
 
 export default {
   components: {
@@ -27,13 +19,14 @@ export default {
     About,
     ToAction,
     FooterApp
-  }
-  /* apollo: {
-    characters: {
-      prefetch: true,
-      query: Characters
+  },
+  head() {
+    return {
+      meta: [
+        { hid: 'fbimage', property: 'og:image', content: 'https://abogados.josejollja.com/wp-content/uploads/2020/05/logo-abogado.png' },
+      ]
     }
-  } */
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <banner></banner>
+  <div v-if="page">
+    <banner :pageData="page"></banner>
     <description></description>
     <to-action class="mt-0"></to-action>
     <footer-app></footer-app>
@@ -12,7 +12,7 @@ import Banner from '@/components/services/Banner'
 import Description from '@/components/services/Description'
 import ToAction from '@/components/global/ToAction'
 import FooterApp from '@/components/global/Footer'
-/* import Characters from '~/apollo/queries/characters' */
+import service from '~/apollo/queries/service'
 
 /* query Characters {
   characters {
@@ -46,13 +46,13 @@ export default {
           {property: 'og:description', content: description}
         ]
       }
-  }
-  /* apollo: {
-    characters: {
+  },
+  apollo: {
+    page: {
       prefetch: true,
-      query: Characters
+      query: service
     }
-  } */
+  }
 }
 </script>
 

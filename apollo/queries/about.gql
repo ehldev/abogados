@@ -1,6 +1,5 @@
 {
   page(id: "cGFnZToxNQ==") {
-    id
     title
     content
     featuredImage{

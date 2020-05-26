@@ -1,5 +1,5 @@
 <template>
-<div class="container contact">
+<div class="container contact" v-if="redesSociales">
     <div class="row">
         <div class="col-lg-6 mb-5 mb-lg-0">
             <div class="contact__info">
@@ -15,7 +15,7 @@
                     <span class="icon mr-2">
                         <i class="fas fa-mobile-alt"></i>
                     </span>
-                    <span class="contact__item-content">{{ pageData.contacto.telefono }}</span>
+                    <span class="contact__item-content">{{ redesSociales.edges[0].node.redes.celular }}</span>
                 </p>
 
                 <!--Email -->
@@ -23,7 +23,7 @@
                     <span class="icon">
                         <i class="far fa-envelope-open"></i>
                     </span>
-                    <a href="mailto:info@demolink.org" class="contact__item-link">info@demolink.org</a>
+                    <a :href="`mailto:${redesSociales.edges[0].node.redes.correo.trim()}`" class="contact__item-link">{{ redesSociales.edges[0].node.redes.correo }}</a>
                 </p>
 
                 <!--Dirección -->
@@ -31,7 +31,7 @@
                     <span class="icon mr-2">
                         <i class="fas fa-map-marker-alt"></i>
                     </span>
-                    <span class="contact__item-content">{{ pageData.contacto.direccion }}</span>
+                    <span class="contact__item-content">{{ ubication }}</span>
                 </p>
 
             </div>
@@ -94,14 +94,16 @@
     <!-- Maps -->
     <div class="row maps">
         <div class="col-md-12">
-            <div v-html="pageData.contacto.mapa"></div>
+            <!-- El iframe del mapa viene de la página de contacto -->
+            <div v-if="mapa" v-html="mapa"></div>
         </div>
     </div>
 </div>
 </template>
 
 <script>
-/* import api from '@/services/api' */
+// Queries
+import contactInfo from '@/apollo/queries/contact-info'
 
 export default {
     data() {
@@ -123,7 +125,13 @@ export default {
             ]
         }
     },
-    props: ['pageData'],
+    props: ['ubication', 'mapa'],
+    apollo: {
+        redesSociales: {
+            prefetch: true,
+            query: contactInfo
+        }
+    },
     methods: {
         validate() {
             if(this.$refs.form.validate()) {

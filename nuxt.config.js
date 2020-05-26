@@ -14,7 +14,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
       { hid: 'fbtype', property: 'og:type', content: 'website' },
-      { hid: 'fbimage', property: 'og:image', content: 'https://abogados.josejollja.com/wp-content/uploads/2020/05/logo-abogado.png' },
+      /* Twitter meta */
       { hid: 'twcard', property: 'twitter:card', content: 'https://abogados.josejollja.com/wp-content/uploads/2020/05/logo-abogado.png' },
       { hid: 'twimage', property: 'twitter:image', content: 'https://abogados.josejollja.com/wp-content/uploads/2020/05/logo-abogado.png' }    ],
     link: [

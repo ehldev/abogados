@@ -1,44 +1,49 @@
 <template>
-<div class="container service-content">
+<div class="container service-content" v-if="page">
     <div class="row align-items-center">
-        <!-- <div class="col-lg-6 service-content__image">
-        </div> -->
 
-        <div class="col-lg-6 service-images">
-            <div class="service-content__images">
-                <div class="service__image-container-1">
-                    <img src="https://www.esneca.com/wp-content/uploads/tecnico-experto-en-criminologia-perito-judicial-en-criminologia-doble-titulacion.jpg" alt="" class="service__image">
-                </div>
-
-                <div class="service__image-container-2">
-                    <img src="https://www.inpocipe.com/wp-content/uploads/2015/08/Criminologia.jpg" alt="" class="service__image">
-                </div>
-
-                <div class="service__image-container-3">
-                    <img src="https://www.staticjbx.com/images/blog/86644/86644_desktop_31667afbe7ca6edbb95d177a87e347ac_photo.jpg" alt="" class="service__image">
-                </div>
-            </div>
+        <div class="col-lg-6 service__images mt-5 position-relative">
+            <gallery
+            :image="page.criminalistica.imagen1"
+            :image2="page.criminalistica.imagen2"
+            :image3="page.criminalistica.imagen3"
+            >
+            </gallery>
         </div>
 
         <div class="col-lg-6 text-center">
-            <h3 class="service-content__subtitle">Estudio Rikell Vargas & Tuesta</h3>
 
-            <h2 class="service-content__title my-3">Especialistas en ciencias penales</h2>
-
-            <p class="service-content__description">
-                Nos desempeñamos en el análisis de estudios científicos de escenas de crímenes, en especial en los delitos violentos, que hoy en día aquejan y flagelan a la sociedad.
-            </p>
+            <div v-html="page.criminalistica.descripcion" class="service-content__description"></div>
 
             <nuxt-link to="/contacto" class="btn btn-lg btn-primary mt-3">Contáctanos</nuxt-link>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 service-video-container">
+            <div v-html="page.criminalistica.video"></div>
         </div>
     </div>
 </div>
 </template>
 
 <script>
-    export default {
-        
+import Gallery from '@/components/global/Gallery'
+
+// Queries
+import serviceDescription from '@/apollo/queries/service-description'
+
+export default {
+    components: {
+        Gallery
+    },
+    apollo: {
+        page: {
+        prefetch: true,
+        query: serviceDescription
+        }
     }
+}
 </script>
 
 <style lang="scss">
@@ -46,13 +51,7 @@
 
 .service-content {
     margin-top: 3rem;
-
-    /* &__image {
-        background-image: url('https://www.inpocipe.com/wp-content/uploads/2015/08/Criminologia.jpg');
-        background-size: cover;
-        background-position: center;
-        box-shadow: 6px 10px 27px -3px rgba(0,0,0,0.61);
-    } */
+    margin-bottom: 3rem;
 
     &__images {
         max-width: 100%;
@@ -61,11 +60,9 @@
         grid-template-rows: 1fr 1fr 1fr;
     }
 
-    /* &__image {
-        max-width: 100%;
-    } */
+    /* Se selecciona directamente las etiquetas para darle estilos al contenido que viene del graph */
 
-    &__subtitle {
+    h3 {
         font-size: 1em;
         font-weight: 700;
         color: $warning;
@@ -79,7 +76,7 @@
         }
     }
 
-    &__title {
+    h2 {
         font-size: 2em;
         font-weight: 700;
         color: $dark;
@@ -89,7 +86,7 @@
         }
     }
 
-    &__description {
+    p {
         font-size: 1em;
         width: 80%;
         margin: 0 auto;
@@ -102,9 +99,31 @@
             font-size: 1em;
         }
     }
+
+    .service-video-container {
+        /* Esta etiqueta viene como contenedor del video */
+        p {
+            width: 100%;
+            padding: 0;
+
+            @media (min-width: 1024px) {
+                width: 80%;
+            }
+        }
+    }
+
+    iframe {
+        width: 100%;
+        height: 300px;
+
+        @media (min-width: 1024px) {
+            width: 100%;
+            height: 500px;
+        }
+    }
 }
 
-.service-images {
+.service__images {
     margin-top: 5rem;
     order: 2;
 
@@ -123,10 +142,6 @@
 .service__image-container-1 {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-
-    /* @media (min-width: 720px) {
-        grid-column: 2 / 3;
-    } */
 }
 
 .service__image-container-2 {

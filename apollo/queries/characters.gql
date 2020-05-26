@@ -1,8 +1,0 @@
-{
-  characters {
-    results {
-      id
-      name
-    }
-  }
-}

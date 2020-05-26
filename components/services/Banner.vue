@@ -1,15 +1,13 @@
 <template>
-<section class="container-fluid services-banner">
+<section class="container-fluid services-banner" v-if="pageData" v-bind:style="{backgroundImage: 'url(' + pageData.featuredImage.mediaItemUrl + ')'}">
     <header-app></header-app>
     <div class="row justify-content-center h-100">
         <div class="col-md-12 px-0 h-100">
             <div class="services-banner__info-container h-100">
-                <div class="services-banner__info py-3">
-                    <h2 class="services-banner__title mb-3">Nuestros servicios</h2>
+                <div class="services-banner__info p-3">
+                    <h2 class="services-banner__title mb-3">{{ pageData.title }}</h2>
 
-                    <p class="services-banner__description">
-                        La firma legal, solamente está enfocada a dar asesoría legal en temas penales y el área de Criminalística.
-                    </p>
+                    <div v-html="pageData.content"></div>
                 </div>
             </div>
         </div>
@@ -24,6 +22,7 @@ export default {
     components: {
         HeaderApp
     },
+    props: ['pageData']
 }
 </script>
 
