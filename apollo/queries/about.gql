@@ -6,6 +6,10 @@
       mediaItemUrl
     }
     nosotros{
+      fotoInformacion{
+        mediaItemUrl
+        altText
+      }
       informacion
       mision
       vision

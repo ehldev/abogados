@@ -2,7 +2,7 @@
   <div v-if="page">
     <banner :pageData="page"></banner>
     <description></description>
-    <to-action class="mt-0"></to-action>
+    <!-- <to-action class="mt-0"></to-action> -->
     <footer-app></footer-app>
   </div>
 </template>

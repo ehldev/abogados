@@ -1,31 +1,31 @@
 <template>
 <div class="container publications-list" v-if="publicaciones">
 
-    <div class="row publication mb-5" :class=" (index % 2) === 0 ? 'row--invested' : '' " v-for="(item, index) in publicaciones.edges[0]" :key="index">
+    <div class="row publication mb-5" :class=" (index % 2) === 0 ? 'row--invested' : '' " v-for="(item, index) in publicaciones.edges" :key="index">
         <!-- Esta columna se alterna según el index -->
         <div class="col-md-5 first-column">
             <div class="publication__content">
                 <div class="text-center text-md-left mb-5">
-                    <h2 class="publication__title">{{ item.title }}</h2>
+                    <h2 class="publication__title">{{ item.node.title }}</h2>
                 </div>
-                <div v-html="item.content"></div>
+                <div v-html="item.node.content"></div>
             </div>
         </div>
 
         <!-- Video -->
         <div class="col-md-7 second-column mt-5 mt-md-0">
             <div class="publication__video-container">
-                <div v-html="item.video.url" class="publication__video"></div>
+                <div v-html="item.node.video.url" class="publication__video"></div>
 
-                <div class="publication__video-image" v-bind:style="{backgroundImage: 'url(' + item.video.capaVideo.mediaItemUrl + ')'}">
+                <div class="publication__video-image" v-bind:style="{backgroundImage: 'url(' + item.node.video.capaVideo.mediaItemUrl + ')'}">
                 </div>
             </div>
 
             <div class="publication-images position-relative mt-5">
                 <gallery
-                :image="item.video.imagen1"
-                :image2="item.video.imagen2"
-                :image3="item.video.imagen3"
+                :image="item.node.video.imagen1"
+                :image2="item.node.video.imagen2"
+                :image3="item.node.video.imagen3"
                 >
                 </gallery>
             </div>

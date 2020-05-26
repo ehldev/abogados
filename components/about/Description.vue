@@ -1,10 +1,10 @@
 <template>
-<div>
+<div v-if="imageInfo">
     <section class="container about-description">
         <div class="row justify-content-center">
             <div class="col-md-12 px-0">
                 <div class="about-description__content">
-                    <div class="about-description__image" v-bind:style="{ backgroundImage: 'url(' + image + ')' }">
+                    <div class="about-description__image" v-bind:style="{ backgroundImage: 'url(' + imageInfo + ')' }">
                     </div>
 
                     <div class="about-description__info">
@@ -59,7 +59,7 @@
 
 <script>
 export default {
-    props: ['image', 'info', 'mission', 'vission']
+    props: ['imageInfo', 'info', 'mission', 'vission']
 }
 </script>
 

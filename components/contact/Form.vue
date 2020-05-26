@@ -2,37 +2,39 @@
 <div class="container contact" v-if="redesSociales">
     <div class="row">
         <div class="col-lg-6 mb-5 mb-lg-0">
-            <div class="contact__info">
-                <h3 class="contact__subtitle">PONGÁMONOS EN CONTACTO</h3>
-                <h2 class="contact__title mb-3">Detalles de contacto</h2>
+            <div class="contact__info" v-bind:style="{backgroundImage: 'url(' + backgroundImage + ')'}">
+                <div class="contact__background w-100 h-100">
+                    <h3 class="contact__subtitle">PONGÁMONOS EN CONTACTO</h3>
+                    <h2 class="contact__title mb-3">Detalles de contacto</h2>
 
-                <p class="contact__description">
-                    Envíenos un mensaje, nos encantaría saber de usted.
-                </p>
+                    <p class="contact__description">
+                        Envíenos un mensaje, nos encantaría saber de usted.
+                    </p>
 
-                <!--Teléfono -->
-                <p class="contact__item mb-3">
-                    <span class="icon mr-2">
-                        <i class="fas fa-mobile-alt"></i>
-                    </span>
-                    <span class="contact__item-content">{{ redesSociales.edges[0].node.redes.celular }}</span>
-                </p>
+                    <!--Teléfono -->
+                    <p class="contact__item mb-3">
+                        <span class="icon mr-2">
+                            <i class="fas fa-mobile-alt"></i>
+                        </span>
+                        <span class="contact__item-content">{{ redesSociales.edges[0].node.redes.celular }}</span>
+                    </p>
 
-                <!--Email -->
-                <p class="contact__item mb-3">
-                    <span class="icon">
-                        <i class="far fa-envelope-open"></i>
-                    </span>
-                    <a :href="`mailto:${redesSociales.edges[0].node.redes.correo.trim()}`" class="contact__item-link">{{ redesSociales.edges[0].node.redes.correo }}</a>
-                </p>
+                    <!--Email -->
+                    <p class="contact__item mb-3">
+                        <span class="icon">
+                            <i class="far fa-envelope-open"></i>
+                        </span>
+                        <a :href="`mailto:${redesSociales.edges[0].node.redes.correo.trim()}`" class="contact__item-link">{{ redesSociales.edges[0].node.redes.correo }}</a>
+                    </p>
 
-                <!--Dirección -->
-                <p class="contact__item mb-3 d-flex">
-                    <span class="icon mr-2">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </span>
-                    <span class="contact__item-content">{{ ubication }}</span>
-                </p>
+                    <!--Dirección -->
+                    <p class="contact__item mb-3 d-flex">
+                        <span class="icon mr-2">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                        <span class="contact__item-content">{{ ubication }}</span>
+                    </p>
+                </div>
 
             </div>
         </div>
@@ -125,7 +127,7 @@ export default {
             ]
         }
     },
-    props: ['ubication', 'mapa'],
+    props: ['ubication', 'mapa', 'backgroundImage'],
     apollo: {
         redesSociales: {
             prefetch: true,
@@ -205,10 +207,23 @@ export default {
 }
 
 .contact__info {
-    background-color: $dark;
-    padding: 5rem 3rem;
+    /* background-repeat: round no-repeat; */
+    background-position: center;
+    background-size: cover;
     border-radius: .3rem;
     box-shadow: 1px 10px 15px -8px rgba(0,0,0,0.68);
+}
+
+.contact__background {
+    background-color: rgba($dark, .8);
+
+    padding: 5rem 3rem;
+    
+    transition: background-color 1s;
+
+    &:hover {
+        background-color: rgba($dark, .9);
+    }
 }
 
 .contact__item-content,

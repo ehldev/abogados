@@ -1,7 +1,7 @@
 <template>
   <div v-if="page">
     <banner :pageData="page"></banner>
-    <form-contact :ubication="page.contacto.direccion" :mapa="page.contacto.mapa"></form-contact>
+    <form-contact :ubication="page.contacto.direccion" :mapa="page.contacto.mapa" :backgroundImage="page.contacto.imagenOficina.mediaItemUrl"></form-contact>
     <footer-app></footer-app>
   </div>
 </template>

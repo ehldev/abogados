@@ -1,11 +1,23 @@
 <template>
   <div v-if="page">
     <banner :pageData="page"></banner>
-    <description :image="page.featuredImage.mediaItemUrl" :info="page.nosotros.informacion" :mission="page.nosotros.mision" :vission="page.nosotros.vision"></description>
+
+    <description
+      :imageInfo="page.nosotros.fotoInformacion.mediaItemUrl"
+      :info="page.nosotros.informacion"
+      :mission="page.nosotros.mision"
+      :vission="page.nosotros.vision"
+      >
+    </description>
+
     <values :values="values"></values>
+
     <representative></representative>
+
     <testimonies></testimonies>
+
     <to-action></to-action>
+    
     <footer-app></footer-app>
   </div>
 </template>
