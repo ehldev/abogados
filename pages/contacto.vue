@@ -1,13 +1,26 @@
 <template>
   <div v-if="page">
     <banner :pageData="page"></banner>
-    <form-contact :ubication="page.contacto.direccion" :mapa="page.contacto.mapa" :backgroundImage="page.contacto.imagenOficina.mediaItemUrl"></form-contact>
+
+    <!-- <form-contact :ubication="page.contacto.direccion" :correo="page.contacto.correo" :mapa="page.contacto.mapa" :backgroundImage="page.contacto.imagenOficina.mediaItemUrl"></form-contact> -->
+    <form-contact></form-contact>
+
+    <!-- Maps -->
+    <div class="container maps">
+      <div class="row">
+          <div class="col-md-12">
+              <!-- El iframe del mapa viene de la página de contacto -->
+              <div v-if="page" v-html="page.contacto.mapa"></div>
+          </div>
+      </div>
+    </div>
+
     <footer-app></footer-app>
   </div>
 </template>
 
 <script>
-import { config } from '@/env'
+import { appConfig } from '@/env'
 
 // Components
 import Banner from '@/components/contact/Banner'
@@ -25,8 +38,8 @@ export default {
   },
   head() {
     let title = 'Contacto - Rikell Vargas & Tuesta',
-      description = 'Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.',
-      appUrl = config.appUrl
+      description = appConfig.description,
+      appUrl = appConfig.appUrl
 
     let image = ''
 
@@ -64,4 +77,14 @@ export default {
 <style lang="scss">
 @import '../scss/variables';
 @import '../scss/bootstrap_custom';
+
+.maps {
+  margin-top: 7rem;
+
+  p,
+  iframe {
+    width: 100%;
+  }
+  
+}
 </style>

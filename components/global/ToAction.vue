@@ -35,7 +35,7 @@ export default {
     padding-top: 5rem;
     padding-bottom: 5rem;
     position: relative;
-    box-shadow: 6px 10px 27px -3px rgba(0,0,0,0.61);
+    box-shadow: $shadow;
 
     @media (min-width: 1024px) {
         margin-top: 7rem;

@@ -1,8 +1,8 @@
 <template>
-<div class="container contact" v-if="redesSociales">
+<div class="container contact" v-if="redesSociales && page">
     <div class="row">
         <div class="col-lg-6 mb-5 mb-lg-0">
-            <div class="contact__info" v-bind:style="{backgroundImage: 'url(' + backgroundImage + ')'}">
+            <div class="contact__info" v-bind:style="{backgroundImage: 'url(' + page.contacto.imagenOficina.mediaItemUrl + ')'}">
                 <div class="contact__background w-100 h-100">
                     <h3 class="contact__subtitle">PONGÁMONOS EN CONTACTO</h3>
                     <h2 class="contact__title mb-3">Detalles de contacto</h2>
@@ -24,7 +24,7 @@
                         <span class="icon">
                             <i class="far fa-envelope-open"></i>
                         </span>
-                        <a :href="`mailto:${redesSociales.edges[0].node.redes.correo.trim()}`" class="contact__item-link">{{ redesSociales.edges[0].node.redes.correo }}</a>
+                        <a :href="`mailto:${page.contacto.correo.trim()}`" class="contact__item-link">{{ redesSociales.edges[0].node.redes.correo }}</a>
                     </p>
 
                     <!--Dirección -->
@@ -32,7 +32,7 @@
                         <span class="icon mr-2">
                             <i class="fas fa-map-marker-alt"></i>
                         </span>
-                        <span class="contact__item-content">{{ ubication }}</span>
+                        <span class="contact__item-content">{{ page.contacto.direccion }}</span>
                     </p>
                 </div>
 
@@ -92,19 +92,12 @@
             </div>
         </div>
     </div>
-
-    <!-- Maps -->
-    <div class="row maps">
-        <div class="col-md-12">
-            <!-- El iframe del mapa viene de la página de contacto -->
-            <div v-if="mapa" v-html="mapa"></div>
-        </div>
-    </div>
 </div>
 </template>
 
 <script>
 // Queries
+/* Se consume esta query solo por las redes sociales, el resto de información vienen como propiedades desde la página de contacto */
 import contactInfo from '@/apollo/queries/contact-info'
 
 export default {
@@ -127,9 +120,13 @@ export default {
             ]
         }
     },
-    props: ['ubication', 'mapa', 'backgroundImage'],
+    /* props: ['ubication', 'correo', 'mapa', 'backgroundImage'], */
     apollo: {
         redesSociales: {
+            prefetch: true,
+            query: contactInfo
+        },
+        page: {
             prefetch: true,
             query: contactInfo
         }
@@ -211,7 +208,7 @@ export default {
     background-position: center;
     background-size: cover;
     border-radius: .3rem;
-    box-shadow: 1px 10px 15px -8px rgba(0,0,0,0.68);
+    box-shadow: $shadow;
 }
 
 .contact__background {
@@ -254,9 +251,5 @@ export default {
 
 .theme--light.v-application {
     max-height: 500px;
-}
-
-.maps {
-    margin-top: 7rem;
 }
 </style>

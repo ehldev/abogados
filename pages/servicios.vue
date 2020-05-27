@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { config } from '@/env'
+import { appConfig } from '@/env'
 
 // Components
 import Banner from '@/components/services/Banner'
@@ -33,8 +33,8 @@ export default {
   },
   head() {
     let title = 'Nuestros servicios - Rikell Vargas & Tuesta',
-      description = 'Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.',
-      appUrl = config.appUrl
+      description = appConfig.description,
+      appUrl = appConfig.appUrl
 
     let image = ''
 

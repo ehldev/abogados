@@ -37,7 +37,7 @@ export default {
 
     &__card {
         border: none;
-        box-shadow: 6px 10px 27px -3px rgba(0,0,0,0.61);
+        box-shadow: $shadow;
         border-radius: .2rem;
         height: 350px;
         position: relative;

@@ -1,3 +1,4 @@
+import { appConfig } from './env'
 
 export default {
   mode: 'universal',
@@ -12,7 +13,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.' },
+      { hid: 'description', name: 'description', content: appConfig.description },
       /* Facebook meta */
       { hid: 'fbtype', property: 'og:type', content: 'website' },
 
@@ -66,7 +67,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'https://abogados.josejollja.com/graphql',
+        httpEndpoint: appConfig.graphUrl,
         inMemoryCacheOptions: {
           addTypename: false
         }

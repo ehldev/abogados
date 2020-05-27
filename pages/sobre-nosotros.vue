@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { config } from '@/env'
+import { appConfig } from '@/env'
 
 // Components
 import Banner from '@/components/about/Banner'
@@ -37,13 +37,6 @@ import FooterApp from '@/components/global/Footer'
 // Queries
 import about from '@/apollo/queries/about'
 
-/* query Characters {
-  characters {
-    id
-    name
-  }
-} */
-
 export default {
   components: {
     Banner,
@@ -56,8 +49,8 @@ export default {
   },
   head() {
     let title = 'Sobre nosotros - Rikell Vargas & Tuesta',
-      description = 'La firma Rikell Vargas & Tuesta, constituye un espacio desde el cual nos desempeñamos en el asesoramiento en temas penales de manera eficiente y eficaz. Somos expertos en el ámbito del litigio.',
-      appUrl = config.appUrl
+      description = appConfig.description,
+      appUrl = appConfig.appUrl
 
     let image = ''
 

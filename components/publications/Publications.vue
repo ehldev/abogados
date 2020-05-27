@@ -66,7 +66,7 @@ export default {
 
     iframe {
         width: 100%;
-        box-shadow: 6px 10px 27px -3px rgba(0,0,0,0.61);
+        box-shadow: $shadow;
     }
 }
 

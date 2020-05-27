@@ -13,5 +13,16 @@
         }
       }
     }
+  },
+  page(id: "cGFnZToxOA==") {
+    contacto{
+      imagenOficina{
+        mediaItemUrl
+      }
+      correo
+      telefono
+      direccion
+      mapa
+    }
   }
 }

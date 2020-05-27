@@ -35,7 +35,7 @@ export default {
     background-size: cover;
     background-position: center;
     position: relative;
-    box-shadow: -2px 8px 9px -1px rgba(0,0,0,0.36);
+    box-shadow: $shadow;
 
     @media (min-width: 720px) {
         height: 60vh;

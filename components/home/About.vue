@@ -38,7 +38,7 @@ export default {
 .home-about__content {
     display: grid;
     grid-template-columns: 1fr;
-    box-shadow: 6px 10px 27px -3px rgba(0,0,0,0.61);
+    box-shadow: $shadow;
 
     @media (min-width: 720px) {
         grid-template-columns: 1fr 1fr;

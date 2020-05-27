@@ -9,6 +9,7 @@
       imagenOficina{
         mediaItemUrl
       }
+      correo
       telefono
       direccion
       mapa

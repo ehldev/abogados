@@ -125,7 +125,7 @@ export default {
     background-position: center;
     position: relative;
     min-height: 400px;
-    box-shadow: 6px 10px 27px -3px rgba(0,0,0,0.61);
+    box-shadow: $shadow;
 
     grid-column: 1 / 2;
     grid-row: 2 / 3;
@@ -158,7 +158,7 @@ export default {
         border: none !important;
         transition: background-color 1s;
         position: relative;
-        box-shadow: 1px 10px 15px -8px rgba(0,0,0,0.68);
+        box-shadow: $shadow;
 
         @media (min-width: 720px) {
             height: 400px;
@@ -176,20 +176,7 @@ export default {
             color: $warning;
             transform: translateY(-1rem);
         }
-
-        /* &:before {
-            -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
-            background: none repeat scroll 0 0 $warning;
-            border-color: #FFFFFF #FFFFFF $warning $warning;
-            border-style: solid;
-            border-width: 0 36px 36px 0;
-            content: "";
-            display: block;
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 0;
-        } */
+        
     }
 
 

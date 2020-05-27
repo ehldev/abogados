@@ -2,18 +2,22 @@
   <div>
     <carousel></carousel>
     <about></about>
+    <publications-banner></publications-banner>
     <to-action></to-action>
+    <form-contact></form-contact>
     <footer-app></footer-app>
   </div>
 </template>
 
 <script>
-import { config } from '@/env'
+import { appConfig } from '@/env'
 
 // Components
 import Carousel from '~/components/home/Carousel'
 import About from '~/components/home/About'
+import PublicationsBanner from '@/components/home/PublicationsBanner'
 import ToAction from '@/components/global/ToAction'
+import FormContact from '@/components/contact/Form'
 import FooterApp from '@/components/global/Footer'
 
 
@@ -21,13 +25,15 @@ export default {
   components: {
     Carousel,
     About,
+    PublicationsBanner,
     ToAction,
+    FormContact,
     FooterApp
   },
   head() {
     let title = 'Rikell Vargas & Tuesta',
-      description = 'Somos expertos en el ámbito del litigio, lo cual nos permite dar solución a incertidumbres jurídicas a través de diferentes mecanismos legales, pensando en el mejor bienestar para el cliente.',
-      appUrl = config.appUrl
+      description = appConfig.description,
+      appUrl = appConfig.appUrl
 
     return {
       meta: [

@@ -20,7 +20,9 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import '../../scss/_variables';
+
 .gallery {
     max-width: 100%;
     display: grid;
@@ -34,7 +36,7 @@
     min-height: 180px;
     max-height: 100%;
     border-radius: .2rem;
-    box-shadow: 6px 10px 27px -3px rgba(0,0,0,0.61);
+    box-shadow: $shadow;
 }
 
 .gallery__image-container-1 {
