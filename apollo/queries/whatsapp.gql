@@ -1,0 +1,13 @@
+{
+  redesSociales {
+    edges {
+      node {
+        redes{
+          facebook
+          youtube
+          whatsapp
+        }
+      }
+    }
+  }
+}

@@ -1,16 +1,24 @@
 <template>
-  <div>
+  <div v-if="page">
     <carousel></carousel>
-    <about></about>
-    <publications-banner></publications-banner>
+    
+    <about :content="page.content" :image="page.featuredImage"></about>
+
+    <publications-banner :info="page.home"></publications-banner>
+
     <to-action></to-action>
+
     <form-contact></form-contact>
+
     <footer-app></footer-app>
   </div>
 </template>
 
 <script>
 import { appConfig } from '@/env'
+
+// Queries
+import home from '@/apollo/queries/home'
 
 // Components
 import Carousel from '~/components/home/Carousel'
@@ -29,6 +37,12 @@ export default {
     ToAction,
     FormContact,
     FooterApp
+  },
+  apollo: {
+    page: {
+      prefetch: true,
+      query: home
+    }
   },
   head() {
     let title = 'Rikell Vargas & Tuesta',

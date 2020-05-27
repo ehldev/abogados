@@ -1,0 +1,17 @@
+{
+  page(id: "cGFnZToxMw=="){
+    title
+    content
+    featuredImage{
+      mediaItemUrl
+      altText
+    }
+    home{
+      publicaciones
+      imagenPublicacion {
+        mediaItemUrl
+        altText
+      }
+    }
+  }
+}

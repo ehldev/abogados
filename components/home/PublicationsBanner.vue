@@ -1,15 +1,14 @@
 <template>
-<div class="container banner-publications py-0 text-center text-md-left">
+<div class="container banner-publications py-0 text-center text-md-left" v-if="info">
     <div class="row">
         <div class="col-md-5 position-relative p-0">
-            <img src="/publications-banner.jpg" alt="Imagen de publicaciones" class="banner-publications__image">
+            <img :src="info.imagenPublicacion.mediaItemUrl" alt="Imagen de publicaciones" class="banner-publications__image">
 
             <div class="banner-publications__gradient"></div>
         </div>
         <div class="col-md-7">
             <div class="banner-publications__content h-100 p-3">
-                <h1 class="banner-publications__title">Conozca nuestras publicaciones</h1>
-                <p class="banner-publications__description">Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.</p>
+                <div v-html="info.publicaciones"></div>
 
                 <nuxt-link to="/publicaciones" class="btn btn-outline-warning mt-3 px-lg-5 align-self-md-start">Ver todas</nuxt-link>
             </div>
@@ -19,9 +18,9 @@
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {
+    props: ['info']
+}
 </script>
 
 <style lang="scss">
@@ -64,9 +63,13 @@
         justify-content: center;
     }
 
-    &__title {
+    h2 {
         font-size: 2em;
         font-weight: 700;
+    }
+
+    p {
+        width: 95%;
     }
 }
 </style>

@@ -1,94 +1,96 @@
 <template>
-<div class="container contact" v-if="redesSociales && page">
-    <div class="row">
-        <div class="col-lg-6 mb-5 mb-lg-0">
-            <div class="contact__info" v-bind:style="{backgroundImage: 'url(' + page.contacto.imagenOficina.mediaItemUrl + ')'}">
-                <div class="contact__background w-100 h-100">
-                    <h3 class="contact__subtitle">PONGÁMONOS EN CONTACTO</h3>
-                    <h2 class="contact__title mb-3">Detalles de contacto</h2>
+<div id="contact" class="py-5">
+    <div class="container contact" v-if="redesSociales && page">
+        <div class="row">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="contact__info" v-bind:style="{backgroundImage: 'url(' + page.contacto.imagenOficina.mediaItemUrl + ')'}">
+                    <div class="contact__background w-100 h-100">
+                        <h3 class="contact__subtitle">PONGÁMONOS EN CONTACTO</h3>
+                        <h2 class="contact__title mb-3">Detalles de contacto</h2>
 
-                    <p class="contact__description">
-                        Envíenos un mensaje, nos encantaría saber de usted.
-                    </p>
+                        <p class="contact__description">
+                            Envíenos un mensaje, nos encantaría saber de usted.
+                        </p>
 
-                    <!--Teléfono -->
-                    <p class="contact__item mb-3">
-                        <span class="icon mr-2">
-                            <i class="fas fa-mobile-alt"></i>
-                        </span>
-                        <span class="contact__item-content">{{ redesSociales.edges[0].node.redes.celular }}</span>
-                    </p>
+                        <!--Teléfono -->
+                        <p class="contact__item mb-3">
+                            <span class="icon mr-2">
+                                <i class="fas fa-mobile-alt"></i>
+                            </span>
+                            <span class="contact__item-content">{{ redesSociales.edges[0].node.redes.celular }}</span>
+                        </p>
 
-                    <!--Email -->
-                    <p class="contact__item mb-3">
-                        <span class="icon">
-                            <i class="far fa-envelope-open"></i>
-                        </span>
-                        <a :href="`mailto:${page.contacto.correo.trim()}`" class="contact__item-link">{{ redesSociales.edges[0].node.redes.correo }}</a>
-                    </p>
+                        <!--Email -->
+                        <p class="contact__item mb-3">
+                            <span class="icon">
+                                <i class="far fa-envelope-open"></i>
+                            </span>
+                            <a :href="`mailto:${page.contacto.correo.trim()}`" class="contact__item-link">{{ redesSociales.edges[0].node.redes.correo }}</a>
+                        </p>
 
-                    <!--Dirección -->
-                    <p class="contact__item mb-3 d-flex">
-                        <span class="icon mr-2">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </span>
-                        <span class="contact__item-content">{{ page.contacto.direccion }}</span>
-                    </p>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <v-app v-if="!formSend">
-                <v-form
-                    ref="form"
-                    v-model="valid"
-                    lazy-validation>
-
-                    <v-text-field
-                        v-model="name"
-                        label="Nombre completo"
-                        filled
-                        :rules="fieldRequired"
-                    ></v-text-field>
-
-                    <v-text-field
-                        v-model="email"
-                        label="Correo electrónico"
-                        filled
-                        :rules="emailRules"
-                    ></v-text-field>
-
-                    <v-text-field
-                        v-model="phone"
-                        label="Número de contacto"
-                        filled
-                        :rules="fieldRequired"
-                    ></v-text-field>
-
-                    <v-text-field
-                        v-model="subject"
-                        label="Asunto"
-                        filled
-                        :rules="fieldRequired"
-                    ></v-text-field>
-
-                    <v-textarea
-                    v-model="message"
-                    filled
-                    name="input-7-4"
-                    label="Mensaje"
-                    :rules="fieldRequired"
-                    ></v-textarea>
-
-                    <div class="form-group text-right">
-                        <button @click.prevent="validate()" :disabled=" loading ? true : false " class="btn btn-lg btn-warning text-white px-5">{{ loading ? 'Enviando...' : 'Enviar mensaje' }}</button>
+                        <!--Dirección -->
+                        <p class="contact__item mb-3 d-flex">
+                            <span class="icon mr-2">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </span>
+                            <span class="contact__item-content">{{ page.contacto.direccion }}</span>
+                        </p>
                     </div>
-                </v-form>
-            </v-app>
-            
-            <div class="send-message" v-else>
-                <h2 class="send-message__title">Gracias por su mensaje. Ha sido enviado.</h2>
+
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <v-app v-if="!formSend">
+                    <v-form
+                        ref="form"
+                        v-model="valid"
+                        lazy-validation>
+
+                        <v-text-field
+                            v-model="name"
+                            label="Nombre completo"
+                            filled
+                            :rules="fieldRequired"
+                        ></v-text-field>
+
+                        <v-text-field
+                            v-model="email"
+                            label="Correo electrónico"
+                            filled
+                            :rules="emailRules"
+                        ></v-text-field>
+
+                        <v-text-field
+                            v-model="phone"
+                            label="Número de contacto"
+                            filled
+                            :rules="fieldRequired"
+                        ></v-text-field>
+
+                        <v-text-field
+                            v-model="subject"
+                            label="Asunto"
+                            filled
+                            :rules="fieldRequired"
+                        ></v-text-field>
+
+                        <v-textarea
+                        v-model="message"
+                        filled
+                        name="input-7-4"
+                        label="Mensaje"
+                        :rules="fieldRequired"
+                        ></v-textarea>
+
+                        <div class="form-group text-right">
+                            <button @click.prevent="validate()" :disabled=" loading ? true : false " class="btn btn-lg btn-warning text-white px-5">{{ loading ? 'Enviando...' : 'Enviar mensaje' }}</button>
+                        </div>
+                    </v-form>
+                </v-app>
+                
+                <div class="send-message" v-else>
+                    <h2 class="send-message__title">Gracias por su mensaje. Ha sido enviado.</h2>
+                </div>
             </div>
         </div>
     </div>

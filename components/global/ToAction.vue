@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
             <div v-html="page.nosotros.frase" class="to-action__info"></div>
-            <nuxt-link to="/contacto" class="btn btn-lg btn-warning mt-3">Contáctanos</nuxt-link>
+            <nuxt-link to="#contact" class="btn btn-lg btn-warning mt-3">Contáctanos</nuxt-link>
         </div>
     </div>
 </section>
