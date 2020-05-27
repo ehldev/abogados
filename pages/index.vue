@@ -58,6 +58,13 @@ export default {
         {property: 'og:site_name', content: title},
         {property: 'og:description', content: description},
 
+        /* Whatsapp */
+        {property: 'og:image', content: 'https://abogados.josejollja.com/wp-content/uploads/2020/05/logo-abogado.png' },
+        {property: 'og:url', content: `${appUrl}`},
+        {property: 'og:title', content: title},
+        {property: 'og:site_name', content: title},
+        {property: 'og:description', content: description},
+
         /* Twitter */
         {name: 'twitter:url', content: `${appUrl}`},
         {name: 'twitter:image', content: 'https://abogados.josejollja.com/wp-content/uploads/2020/05/logo-abogado.png' },

@@ -52,6 +52,13 @@ export default {
           {property: 'og:description', content: description},
           {property: 'og:image', content: image},
 
+          // Whatsapp OpenGraph
+          {property: 'og:url', content: `${appUrl}/servicios`},
+          {property: 'og:title', content: title},
+          {property: 'og:site_name', content: title},
+          {property: 'og:description', content: description},
+          {property: 'og:image', content: image},
+
           // Twitter OpenGraph
           {name: 'twitter:url', content: `${appUrl}/servicios`},
           {name: 'twitter:image', content: image},
