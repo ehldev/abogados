@@ -16,7 +16,7 @@ ya que por defecto el carousel no tiene una altura para mejor personalización -
                     <!-- Contenido personalizado aquí, puedes acceder al contenido del item actual mediante la propiedad currentItem -->
                     <div class="carousel__content-custom mt-md-5 mt-xl-0">
                         <h1 class="carousel__title">{{ item.title }}</h1>
-                        
+
                         <div v-html="item.content" class="carousel__description mt-3 py-0"></div>
                     </div>
 
@@ -66,7 +66,8 @@ export default {
     apollo: {
       sliders: {
         prefetch: true,
-        query: carouselItems
+        query: carouselItems,
+        fetchPolicy: 'no-cache'
       }
     },
     components: {

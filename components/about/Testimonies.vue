@@ -19,7 +19,7 @@
                                     <!-- Contenido personalizado aquí, puedes acceder al contenido del item actual mediante la propiedad currentItem -->
                                     <div class="carousel__content-custom">
                                         <h1 class="testimonies__carousel-title">{{ item.title }}</h1>
-                                        
+
                                         <div v-html="item.content" class="testimonies__carousel-description mt-3 py-0"></div>
                                     </div>
 
@@ -69,7 +69,8 @@ export default {
     apollo: {
         testimoniales: {
             prefetch: true,
-            query: testimoniales
+            query: testimoniales,
+            fetchPolicy: 'no-cache'
         }
     },
     methods: {
@@ -106,7 +107,7 @@ export default {
     margin-top: 6rem;
     padding-top: 3rem;
     padding-bottom: 3rem;
-    
+
     @media (min-width: 720px) {
         margin-top: 5rem;
         padding-top: 6rem;

@@ -17,7 +17,7 @@
     <testimonies></testimonies>
 
     <to-action></to-action>
-    
+
     <footer-app></footer-app>
   </div>
 </template>
@@ -57,7 +57,7 @@ export default {
     if(this.page) {
       image = this.page.featuredImage.mediaItemUrl
     }
-      
+
     return {
         title: title,
         meta: [
@@ -86,7 +86,8 @@ export default {
   apollo: {
       page: {
           prefetch: true,
-          query: about
+          query: about,
+          fetchPolicy: 'no-cache'
       }
   },
   computed: {

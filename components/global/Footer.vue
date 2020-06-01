@@ -20,7 +20,7 @@
                             <span class="footer__icon">
                                 <i class="fas fa-mobile-alt"></i>
                             </span>
-                            
+
                             {{ redesSociales.edges[0].node.redes.celular }}
                         </p>
                         <p class="description text-white mb-2 d-flex justify-content-center justify-content-md-start">
@@ -52,7 +52,7 @@
             </div>
 
         </div>
-        
+
     </div>
 </footer>
 </template>
@@ -65,7 +65,8 @@ export default {
     apollo: {
         redesSociales: {
             prefetch: true,
-            query: contactInfo
+            query: contactInfo,
+            fetchPolicy: 'no-cache'
         }
     }
 }

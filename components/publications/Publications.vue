@@ -49,7 +49,8 @@ export default {
     apollo: {
         publicaciones: {
             prefetch: true,
-            query: publications
+            query: publications,
+            fetchPolicy: 'no-cache'
         }
     }
 }
@@ -99,7 +100,7 @@ export default {
             margin: auto;
 
             position: absolute;
-            
+
             bottom: -1rem;
             left: 0;
             right: 0;

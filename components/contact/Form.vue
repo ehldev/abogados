@@ -87,7 +87,7 @@
                         </div>
                     </v-form>
                 </v-app>
-                
+
                 <div class="send-message" v-else>
                     <h2 class="send-message__title">Gracias por su mensaje. Ha sido enviado.</h2>
                 </div>
@@ -126,11 +126,13 @@ export default {
     apollo: {
         redesSociales: {
             prefetch: true,
-            query: contactInfo
+            query: contactInfo,
+            fetchPolicy: 'no-cache'
         },
         page: {
             prefetch: true,
-            query: contactInfo
+            query: contactInfo,
+            fetchPolicy: 'no-cache'
         }
     },
     methods: {
@@ -217,7 +219,7 @@ export default {
     background-color: rgba($dark, .8);
 
     padding: 5rem 3rem;
-    
+
     transition: background-color 1s;
 
     &:hover {

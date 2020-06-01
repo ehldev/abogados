@@ -18,7 +18,8 @@ export default {
     apollo: {
         page: {
             prefetch: true,
-            query: toAction
+            query: toAction,
+            fetchPolicy: 'no-cache'
         }
     }
 }

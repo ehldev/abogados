@@ -1,7 +1,7 @@
 <template>
   <div v-if="page">
     <carousel></carousel>
-    
+
     <about :content="page.content" :image="page.featuredImage"></about>
 
     <publications-banner :info="page.home"></publications-banner>
@@ -41,7 +41,8 @@ export default {
   apollo: {
     page: {
       prefetch: true,
-      query: home
+      query: home,
+      fetchPolicy: 'no-cache'
     }
   },
   head() {

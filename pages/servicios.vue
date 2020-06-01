@@ -41,7 +41,7 @@ export default {
     if(this.page) {
       image = this.page.featuredImage.mediaItemUrl
     }
-      
+
     return {
         title: title,
         meta: [
@@ -70,7 +70,8 @@ export default {
   apollo: {
     page: {
       prefetch: true,
-      query: service
+      query: service,
+      fetchPolicy: 'no-cache'
     }
   }
 }

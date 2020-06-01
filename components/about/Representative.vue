@@ -23,7 +23,8 @@ export default {
     apollo: {
       page: {
         prefetch: true,
-        query: representative
+        query: representative,
+        fetchPolicy: 'no-cache'
       }
     }
 }

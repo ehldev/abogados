@@ -39,8 +39,9 @@ export default {
     },
     apollo: {
         page: {
-        prefetch: true,
-        query: serviceDescription
+          prefetch: true,
+          query: serviceDescription,
+          fetchPolicy: 'no-cache'
         }
     }
 }
