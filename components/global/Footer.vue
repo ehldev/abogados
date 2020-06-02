@@ -65,7 +65,8 @@ export default {
     apollo: {
         redesSociales: {
             prefetch: true,
-            query: contactInfo
+            query: contactInfo,
+            fetchPolicy: 'no-cache'
         }
     }
 }
@@ -79,7 +80,7 @@ export default {
     background-image: url('https://usmp.edu.pe/posgrado/images/maestria_derecho_registral.jpg');
     background-size: cover;
     margin-top: 5rem;
-    padding-top: 3rem 0;
+    padding-top: 3rem;
     position: relative;
 
     @media (min-width: 720px) {
