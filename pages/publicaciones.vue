@@ -62,8 +62,7 @@ export default {
   apollo: {
     page: {
       prefetch: true,
-      query: publicationsPage,
-      fetchPolicy: 'no-cache'
+      query: publicationsPage
     }
   }
 }

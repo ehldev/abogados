@@ -65,8 +65,7 @@ export default {
     apollo: {
         redesSociales: {
             prefetch: true,
-            query: contactInfo,
-            fetchPolicy: 'no-cache'
+            query: contactInfo
         }
     }
 }

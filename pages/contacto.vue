@@ -75,8 +75,7 @@ export default {
   apollo: {
     page: {
       prefetch: true,
-      query: contact,
-      fetchPolicy: 'no-cache'
+      query: contact
     }
   }
 }

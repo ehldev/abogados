@@ -1,5 +1,5 @@
 <template>
-<div class="banner" v-if="sliders">
+<div class="banner" v-if="items">
     <!-- <header-app logo="white"></header-app> -->
     <header-app></header-app>
 
@@ -10,7 +10,7 @@ ya que por defecto el carousel no tiene una altura para mejor personalización -
 <section class="carousel carousel-custom">
     <transition-group name="fade">
         <template v-if="initAnimated">
-            <div class="carousel__item" v-for="(item, index) in reverseItems" :key="index" :class="index === currentIndex ? 'carousel__item--active' : ''">
+            <div class="carousel__item" v-for="(item, index) in items" :key="index" :class="index === currentIndex ? 'carousel__item--active' : ''">
                 <div class="carousel__item-content">
 
                     <!-- Contenido personalizado aquí, puedes acceder al contenido del item actual mediante la propiedad currentItem -->
@@ -28,7 +28,7 @@ ya que por defecto el carousel no tiene una altura para mejor personalización -
 
     <div class="carousel__points">
         <div class="carousel__points-container">
-            <button class="carousel__point" :class="index === currentIndex ? 'carousel__point--active' : ''" v-for="(item, index) in reverseItems.length" :key="index" @click="changeCurrentIndex(index)"></button>
+            <button class="carousel__point" :class="index === currentIndex ? 'carousel__point--active' : ''" v-for="(item, index) in items.length" :key="index" @click="changeCurrentIndex(index)"></button>
         </div>
     </div>
 </section>
@@ -51,10 +51,15 @@ export default {
             currentItem: {},
             currentIndex: 0,
             initAnimated: false,
-            currentTime: 4000
+            currentTime: 4000,
+            items: []
         }
     },
     mounted() {
+      this.getItems()
+      .then(items => {
+        this.items = items.reverse()
+
         // Asigna la primera imagen
         this.setCurrentItem()
 
@@ -62,47 +67,44 @@ export default {
 
         // Controla el fade del inicio
         this.initAnimated = true
-    },
-    apollo: {
-      sliders: {
-        prefetch: true,
-        query: carouselItems,
-        fetchPolicy: 'no-cache'
-      }
+      })
     },
     components: {
         HeaderApp
     },
     methods: {
+      getItems() {
+        const promiseItems = new Promise((resolve, reject) => {
+          this.$apollo.query({
+            query: carouselItems,
+            prefetch: true,
+            fetchPolicy: 'no-cache'
+          }).
+            then(response => resolve(response.data.sliders.nodes) )
+        })
+
+        return promiseItems
+      },
         setCurrentItem() {
-            if(this.reverseItems) {
-                this.currentItem = this.reverseItems[this.currentIndex]
-            }
+          this.currentItem = this.items[this.currentIndex]
         },
         changeByInterval() {
             setInterval(() => {
                 // Aumenta en 1 el index
-                if(this.currentIndex < (this.reverseItems.length - 1)) {
+                if(this.currentIndex < (this.items.length - 1)) {
                     this.currentIndex++
                 } else {
                     this.currentIndex = 0
                 }
 
-                this.currentItem = this.reverseItems[this.currentIndex]
+                this.currentItem = this.items[this.currentIndex]
             }, this.currentTime)
         },
         changeCurrentIndex(index) {
-            this.currentItem = this.reverseItems[index]
+            this.currentItem = this.items[index]
 
             this.currentIndex = index
         }
-    },
-    computed: {
-      reverseItems: function() {
-        if(this.sliders) {
-          return this.sliders.nodes.reverse()
-        }
-      }
     }
 }
 </script>

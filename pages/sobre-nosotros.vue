@@ -1,24 +1,26 @@
 <template>
-  <div v-if="page">
-    <banner :pageData="page"></banner>
+  <div>
+    <div v-if="page">
+      <banner :pageData="page"></banner>
 
-    <description
-      :imageInfo="page.nosotros.fotoInformacion.mediaItemUrl"
-      :info="page.nosotros.informacion"
-      :mission="page.nosotros.mision"
-      :vission="page.nosotros.vision"
+      <description
+        :imageInfo="page.nosotros.fotoInformacion.mediaItemUrl"
+        :info="page.nosotros.informacion"
+        :mission="page.nosotros.mision"
+        :vission="page.nosotros.vision"
       >
-    </description>
+      </description>
 
-    <values :values="values"></values>
+      <values :values="values"></values>
 
-    <representative></representative>
+      <representative></representative>
 
-    <testimonies></testimonies>
+      <testimonies></testimonies>
 
-    <to-action></to-action>
+      <to-action></to-action>
 
-    <footer-app></footer-app>
+      <footer-app></footer-app>
+    </div>
   </div>
 </template>
 
@@ -86,8 +88,7 @@ export default {
   apollo: {
       page: {
           prefetch: true,
-          query: about,
-          fetchPolicy: 'no-cache'
+          query: about
       }
   },
   computed: {

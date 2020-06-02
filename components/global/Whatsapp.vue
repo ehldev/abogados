@@ -17,8 +17,7 @@ export default {
     apollo: {
         redesSociales: {
             prefetch: true,
-            query: whatsapp,
-            fetchPolicy: 'no-cache'
+            query: whatsapp
         }
     }
 }

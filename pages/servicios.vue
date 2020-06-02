@@ -70,8 +70,7 @@ export default {
   apollo: {
     page: {
       prefetch: true,
-      query: service,
-      fetchPolicy: 'no-cache'
+      query: service
     }
   }
 }
